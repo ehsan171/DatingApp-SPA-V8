@@ -1,0 +1,325 @@
+
+
+<div
+(mousedown)="mouseClickDown($event)"
+(mouseup)="mouseClickUp($event)">
+    <form [formGroup]="resourceForm" >
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+          
+            <ejs-dropdownlist 
+            [(ngModel)]="selectedOption"
+            enableRtl='true' 
+            floatLabelType="Auto" 
+            id='ddlelement' 
+            #samples 
+            [dataSource]="dataResource"
+            [fields]='fieldResource' 
+            formControlName="resourceId" 
+            [placeholder]='textResource' 
+            [allowFiltering]='true' 
+            (filtering)='onFilteringResource($event)'
+            (change)="onChangeResource($event.value)">a
+          </ejs-dropdownlist>
+        
+          </div>
+        </div>
+<!-- 
+        <div class="col">
+          <div class="form-group">
+          
+            <ejs-dropdownlist 
+            [(ngModel)]="selectedCapacity"
+            enableRtl='true' 
+            floatLabelType="Auto" 
+            id='requestResId' 
+            #samples 
+            [dataSource]='data' 
+            [fields]='capacityFields' 
+            formControlName="capacity"
+            [placeholder]='textCapacity' 
+            (change)="onChangeRequestRes($event.value)"
+            >
+            </ejs-dropdownlist>
+        
+          </div>
+        </div> -->
+
+        <!-- <div class="col" style="width: 50px;">
+          <div class="form-group" >
+            
+            <div class="" >
+              <span class="" style="color: rgb(160, 159, 159);"></span>
+                  <div style="height: 30px;border-bottom:  1px solid rgb(160, 159, 159);  margin-top: 20px; text-align: right ;" >
+                
+                  {{resourceUnit}}
+                  
+                  </div>
+            
+          </div>
+    
+    
+          </div>
+        </div>
+    
+      -->
+       
+      
+      <div class="col">
+          <div class="form-group">
+          
+            <ejs-dropdownlist 
+            enableRtl='true' 
+            floatLabelType="Auto" 
+            id='yearId' 
+            #samples 
+            [dataSource]='yearData' 
+            [fields]='yearFields' 
+           
+            formControlName="yearFormControl"
+            [placeholder]='textYear' 
+            (change)="onChangeYear($event.value)"
+            >
+            </ejs-dropdownlist>
+        
+          </div>
+        </div>
+     
+     
+        <div class="col">
+          <div class="form-group">
+          
+            <ejs-dropdownlist 
+            enableRtl='true' 
+            floatLabelType="Auto" 
+            id='monthId' 
+            #samples 
+            [dataSource]='monthData' 
+            [fields]='fieldMonth' 
+            formControlName="monthFormControl"
+            [placeholder]='textMonth' 
+            (change)="onChangeMonth($event.value)"
+            >
+            </ejs-dropdownlist>
+        
+          </div>
+        </div>
+     
+     
+      </div>
+
+    </form>
+    <!-- <button (click)="onSave()">test2</button>
+    <button (click)="register()">register</button> -->
+  
+   
+    <div class="bxday">
+
+
+
+<button class="day_btn" *ngFor="let column of ArrayRowsDataset; let i = index"
+[style.background-color]=""
+[style.color]=""
+(click)="divFunction(i)">
+{{ArrayRowsExtraDataset[i][0]['day']}}
+</button>
+
+
+    </div>
+
+
+
+    
+    <div *ngFor="let column of ArrayRowsDataset; let i = index">
+      <ng-container *ngIf="ArrayRowsExtraDataset[i][0]">
+      <div style="width: 100%; text-align: right; padding-bottom:5px ;margin-bottom: 10px;">
+       
+      </div>
+      </ng-container>
+      
+      
+ 
+      <div  [@openClose]="div[i] ? 'open' : 'closed'">
+            
+        <div class="test container tbltop">
+          <table class='table table-sm table_info' aria-labelledby="tableLabel" style="  user-select: none;">  
+            <thead style="background-color: #358eac;">  
+              <tr style="  border: 1px solid #077296;color: #fff;">  
+             
+                <!-- <th scope="col" *ngFor="let column of header2" >  
+                  {{column}}  
+                </th>  -->
+                <th>نام برنامه</th>
+                <th colspan="2">شبکه</th>
+             
+                <th>تهیه کننده</th>
+                <th>تاریخ ثبت</th>
+                <th>زمان سپری شده</th>
+                <th>درصد تداخل</th>
+                <th>تأیید&nbsp;/&nbsp;رد</th> 
+               
+              </tr>  
+            </thead>  
+            <tbody style="  border: 1px solid black;">  
+              <tr class="tdrow" *ngFor="let row of ArrayRowsExtraDataset[i]| slice:1;let indexOfElement=index;" style="  border: 1px solid black;">  
+               
+                <td  
+                  
+                  
+                  ondragstart="return false;" ondrop="return false;"
+                style="  border: 1px solid black;"
+                
+                  >  
+                {{row["hour"]}}
+              
+                </td>  
+                  
+                <td ><img src='../../assets/library/images/{{row["networkId"]}}.png' alt="network icon" width="40" height="40"></td>
+      
+                
+                <td  
+                  
+                  
+                  ondragstart="return false;" ondrop="return false;"
+                style=""
+                
+                  >  
+                {{row["networkName"]}}
+              
+                </td>  
+                  <td  
+                  
+                  
+                  ondragstart="return false;" ondrop="return false;"
+                
+                style="  border: 1px solid black; padding: 0;direction: rtl;"
+                  >  
+                <span style="margin:0;">{{row["producer"]}}</span>
+              
+                </td>  
+                  <td  
+                  
+                  
+                  ondragstart="return false;" ondrop="return false;"
+                
+                style="  border: 1px solid black; padding: 0;direction: rtl;"
+                  >  
+                <span style="margin:0;">{{row["RegDate"]}}</span>
+              
+                </td>  
+                  <td  
+                  
+                  
+                  ondragstart="return false;" ondrop="return false;"
+                
+                style="  border: 1px solid black; padding: 0;direction: rtl;"
+                  >  
+                <span style="margin:0;">{{row["duration"]}}</span>
+              
+                </td>  
+                  <td  
+                  
+                  
+                  ondragstart="return false;" ondrop="return false;"
+                
+                style="  border: 1px solid black; padding: 0;direction: rtl;"
+                  >  
+                <span style="margin:0;">{{(row["totalConflict"]/row["totalDay"])*100| number:'1.0-1'}}%</span>
+              
+                </td>  
+      
+                <td>
+                  <button 
+                  type="button" class="btn btn-success acc_rej_btn btnaccept"
+                  (click)="acceptRequest(resourceId, row['year'], row['month'], row['day'], row['barnameId'])">
+                  تأیید 
+                </button>
+                &nbsp;
+                  <button 
+                  type="button" class="btn btn-danger acc_rej_btn btnrej"
+                  (click)="rejectRequest(resourceId, row['year'], row['month'], row['day'], row['barnameId'])">
+                  رد 
+                </button>
+            
+          
+      
+              </td>
+              
+              </tr>  
+            
+      
+            </tbody>  
+        </table> 
+      </div>
+      
+        <div  class="test container  tblbottom" >
+              <table class='table_class table-sm' aria-labelledby="tableLabel" style="border:1px solid;  user-select: none; ">  
+                <thead style="background-color: #c1dee4;">  
+                  <tr>  
+                    <th scope="col" *ngFor="let column of header">  
+                      {{column === 'activity' ? 'فعالیت' : (column === 'hour' ? 'ساعت' :column) }}  
+                    </th>  
+                  </tr>  
+                </thead>  
+                <tbody style="border: #0000;">  
+                  <tr *ngFor="let row of ArrayRowsDataset[i]| slice:1;let indexOfElement=index;">  
+                      <td  
+                      class="details"
+                      
+                      (mouseover)="onCellClick( indexOfElement, column )" 
+                      (mousedown)="onCellClickSingleClick( indexOfElement, column,$event )" 
+                      ondragstart="return false;" ondrop="return false;"
+                      *ngFor="let column of header"
+                    
+ 
+                      [ngClass]="
+                      (column != 'hour' && row[column])? 'colData'
+                      
+                      : (column == 'hour')? 'colTitle': ''" 
+                       >  
+                    {{row[column]}}
+                    
+                  
+                    </td>  
+                  </tr>  
+                  <tr>
+                    <td  *ngFor="let column of header"
+                    [style.background]="
+                    ( totalOfColumn[i][column]<=remainResourceOfColumn[i][column])?  '#0ffe87'
+                    : (column == 'hour')? '#f4c430': '#ff6b86'">
+                        {{totalOfColumn[i][column]}}
+                    </td>
+                  
+                  </tr>
+                  <tr>
+                    <td  *ngFor="let column of header">
+                        {{remainResourceOfColumn[i][column]}}
+                    </td>
+                  
+                  </tr>
+      
+        
+                  <tr>
+                    <td  *ngFor="let column of header">
+                      {{shortageResourceOfColumn[i][column]}}
+                    </td>
+                  
+                  </tr>
+      
+        
+                </tbody>  
+            </table> 
+          </div>
+      
+      
+      
+      </div>
+      <!-- <hr> -->
+      
+          </div>
+      
+</div>
+
+

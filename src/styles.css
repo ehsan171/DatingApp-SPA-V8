@@ -1,1 +1,156 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/bootswatch/dist/united/bootstrap.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-inputs/styles/material.css';
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('http://fonts.cdnfonts.com/css/iranian-sans');
+
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+@font-face {
+  font-family: 'Lotus';
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Lotus/Lotus.eot');
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Lotus/Lotus.eot?#iefix') format('embedded-opentype'),
+   url('https://cdn.fontcdn.ir/Font/Persian/Lotus/Lotus.woff') format('woff'),
+   url('https://cdn.fontcdn.ir/Font/Persian/Lotus/Lotus.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: Sahel;
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.eot');
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.woff') format('woff'),
+       url('https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.ttf') format('truetype');
+  font-weight: normal;
+}
+body { 
+    font-family: Iranian Sans,Sahel,Lotus,tahoma !important;
+    margin: 0;
+  }
+ th,td,table,b,p,h1,h2,h3,h4,h5,h6,div{
+    font-family: Iranian Sans,Sahel,Lotus,tahoma !important;
+  }
+  .navtop{
+    /* position: fixed; */
+    background-image: url(/assets/library/images/HGEADER.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    height: 140px;
+    background-size: cover;
+    width: 100%;
+  }
+  .basic-container {
+    padding: 5px;
+  }
+  
+  .version-info {
+    font-size: 8pt;
+    float: right;
+  }
+  
+  
+  @font-face {
+      font-family: 'BTraffic';
+       src: url('../src/assets/library/fonts/BTraffic.woff2') format('woff2'),
+        url('../src/assets/library/fonts/BVahidBold.woff') format('woff');
+      font-weight: 900;
+      font-style: normal;
+    }
+  
+  
+  @font-face {
+      font-family: 'Dima';
+       src: url('../src/assets/library/fonts/DimaShekastehFree.woff2') format('woff2'),
+        url('../src/assets/library/fonts/DimaShekastehFree.woff') format('woff');
+      font-weight: 900;
+      font-style: normal;
+    }
+  
+  
+  @font-face {
+      font-family: 'Shekaste';
+       src: url('../src/assets/library/fonts/Shekasteh.woff2') format('woff2'),
+        url('../src/assets/library/fonts/Shekasteh_Beta.woff') format('woff');
+      font-weight: 900;
+      font-style: normal;
+    }
+  
+  
+  @font-face {
+      font-family: 'BZar';
+       src: url('../src/assets/library/fonts/BZar0.woff2') format('woff2'),
+        url('../src/assets/library/fonts/BZar0.woff') format('woff');
+      font-weight: 900;
+      font-style: normal;
+    }
+  
+  
+    .bt-font{
+      font-family: BTraffic;
+    }
+  
+  
+  
+  
+  /* Taein total css  */
+  body{
+      margin: 0;
+      padding: 0;
+      direction: rtl
+  };
+  .rtl{
+      direction: rtl;
+     
+  };
+  .e-float-input{
+    border: 1px solid #066e93 !important;
+  }
+
+  
+  
+  label{
+   display: inline-block;
+      width: 140px;
+      text-align: right;
+  }
+  
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  .br{
+      background-color:  rgba(205, 20, 50, 0.2);
+      
+  }
+  .rtl{
+      direction: rtl;
+  }
+  .alertify-notifier .ajs-message.ajs-error{
+    color: #fff;
+    background: rgba(217, 92, 92, 0,95);
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0,5);
+    direction: rtl;
+    font-family: BTraffic;
+  }
+  
+  .alertify-notifier .ajs-message.ajs-success{
+   
+    direction: rtl;
+    font-family: BTraffic;
+  }
+  
+  .regbtn{
+    min-width: 75px;
+  }

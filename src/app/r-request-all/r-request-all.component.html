@@ -1,0 +1,79 @@
+
+
+<div class="hide">
+  <!-- {{dataScreenplay[0]['title']}} -->
+</div>
+<div style="font-family: BTraffic; direction: rtl;text-align: right;">
+  <mat-form-field style="text-align: right;">
+  <mat-label><span style="font-family: BTraffic;">جستجو</span></mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+</mat-form-field>
+</div>
+
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource2"  matSort class="mat-elevation-z8">
+  
+    <ng-container matColumnDef="row" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  class="title"  style="padding-left: 0;padding-right: 10px;"> ردیف </th>
+      <td mat-cell *matCellDef="let element"  class="tar font-td" style="padding-left: 0;"> {{element.row}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="id" >
+      <th mat-header-cell *matHeaderCellDef class="hide"> No. </th>
+      <td mat-cell *matCellDef="let element" class="hide"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="title" style="width: 15%;" > عنوان برنامه </th>
+      <td mat-cell *matCellDef="let element" class="tar font-td"> {{element.title}} </td>
+      
+    </ng-container>
+    
+ 
+    <ng-container matColumnDef="baravordNo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="title" style="width:10%"> شماره برآورد </th>
+      <td mat-cell *matCellDef="let element" style="font-family: BTraffic;"> {{element.baravordNo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rRequestTitle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> عنوان درخواست </th>
+      <td mat-cell *matCellDef="let element"  class="tar font-td"> {{element.rRequestTitle}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="producer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="title" > تهیه کننده </th>
+      <td mat-cell *matCellDef="let element"  class="tar font-td"> {{element.producer}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="group">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="title"> گروه </th>
+      <td mat-cell *matCellDef="let element"  class="tar font-td"> {{element.group}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="genre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="title" style="padding-left: 15px;"> ژانر </th>
+      <td mat-cell *matCellDef="let element"  class="tar font-td" style="padding-left: 15px;"> {{element.genre}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="regDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="title" style="padding-left: 15px;"> تاریخ ثبت </th>
+      <td mat-cell *matCellDef="let element"  class="tar font-td" style="padding-left: 15px;"> {{element.regDate| date:'yyyy/MM/dd'}} </td>
+    </ng-container>
+    
+    
+    
+    
+   
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></tr> 
+    <!-- <mat-row  *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></mat-row> -->
+  </table>
+
+  <div style="direction: ltr;">
+    <mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  </div>
+    
+</div>

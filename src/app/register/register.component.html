@@ -1,0 +1,53 @@
+<form [formGroup]='userRegForm' #registerForm='ngForm' (ngSubmit)='register()'>
+  <h2 class="text-center text-primary title"><strong>ثبت نام کاربر</strong></h2>
+  <hr>
+
+  
+  <div class="form-group">
+
+    <ejs-autocomplete   enableRtl='true' floatLabelType="Auto" id='firstnameId' #samples formControlName="firstname" [placeholder]='textFirstname' [(ngModel)]="model.firstname" ></ejs-autocomplete>
+  </div>
+
+  
+  <div class="form-group">
+
+    <ejs-autocomplete   enableRtl='true' floatLabelType="Auto" id='lastnameId' #samples formControlName="lastname" [placeholder]='textLastname' [(ngModel)]="model.lastname" ></ejs-autocomplete>
+  </div>
+  
+  <div class="form-group">
+    <!-- <input type="text" class="form-control" formControlName="username" [(ngModel)]="model.username"  placeholder="نام کاربری"> -->
+
+    <ejs-autocomplete   enableRtl='true' floatLabelType="Auto" id='usernameId' #samples formControlName="username" [placeholder]='textUsername' [(ngModel)]="model.username" ></ejs-autocomplete>
+  </div>
+
+
+  <!-- <div class="form-group">
+    <label for="favouriteValue">What is your favourite ....?</label>
+    <select class="form-control" id="favouriteValue">
+      <option *ngFor="let value of valuesFromHome" [value]="value">{{value.name}}</option>
+    </select>
+  </div> -->
+
+  <div class="form-group">
+    
+  <div class="e-float-input e-input-group" style="direction: rtl;">
+    <input id="passwordId" type="password" required  formControlName="password" [(ngModel)]="model.password" >
+    <span class="e-float-line" ></span>
+    <label class="e-float-text"  style="direction: rtl;text-align: right;">کلمه عبور</label>
+</div>
+    <!-- <input type="password" class="form-control" formControlName="password" [(ngModel)]="model.password" placeholder="پسورد"> -->
+  </div>
+ 
+
+  <div class="form-group">
+    <!-- <input type="text" class="form-control" required formControlName="orgId" [(ngModel)]="model.orgId" placeholder="ساختار سازمانی"> -->
+    <ejs-dropdownlist enableRtl='true' floatLabelType="Auto" id='orgIdId' #samples [dataSource]='dataOrgId' [fields]='fieldsFormat' formControlName="orgId" [placeholder]='textOrgId' [allowFiltering]='true' (filtering)='onFilteringFormat($event)' [(ngModel)]="model.orgId">a</ejs-dropdownlist>
+
+  </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" type="submit">ثبت</button>
+    <button class="btn btn-default" type="button" (click)='cancel()'>انصراف</button>
+  </div>
+  
+</form>

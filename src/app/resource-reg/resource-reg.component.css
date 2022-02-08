@@ -1,0 +1,370 @@
+
+
+.b{
+    background-color:'red',
+}
+
+
+    .aaa{
+       background-color: red;
+    
+    }
+
+    .prim_reg{
+        background-color: rgb(121, 144, 189);
+        color: rgb(255,255,255);
+    }
+    .accepted{
+        background-color: rgba(51,204,102,1);
+        color: rgb(255,255,255);
+    }
+    .selected_Cell_ForReg{
+        background-color: rgb(247, 147, 18);
+        color: rgb(255,255,255);
+    
+        box-shadow: 3px -2px 2px rgba(0, 0, 0, 0.2);
+    }
+    .unavailable_Cell_ForReg{
+        background-color: rgba(0,0,0,0.5);
+        color: rgb(255,255,255);
+    }
+    .table_head{
+        background-color: #fff;
+        text-align: center;
+    }
+    
+    .in_query_0{
+        background-color: rgba(204,51,77,0);
+        color: rgb(0,0,0);
+    }
+    
+    .in_query_1{
+        background-color: rgba(204,51,77,0.1);
+        color: rgb(32,32,32);
+    }
+    
+    
+    .in_query_2{
+        background-color: rgba(204,51,77,0.2);
+        color: rgb(64,64,64);
+    }
+    
+    
+    .in_query_3{
+        background-color: rgba(204,51,77,0.3);
+        color: rgb(96,96,96);
+    }
+    
+    
+    .in_query_4{
+        background-color: rgba(204,51,77,0.4);
+        color: rgb(128,128,128);
+    }
+    
+    
+    .in_query_5{
+        background-color: rgba(204,51,77,0.5);
+        color: rgb(160,160,160);
+    }
+    
+    
+    .in_query_6{
+        background-color: rgba(204,51,77,0.6);
+        color: rgb(192,192,192);
+    }
+    
+    
+    .in_query_7{
+        background-color: rgba(204,51,77,0.7);
+        color: rgb(224,224,224);
+    }
+    
+    
+    .in_query_8{
+        background-color: rgba(204,51,77,0.8);
+        color: rgb(255,255,255);
+    }
+    
+    .in_query_9{
+        background-color: rgba(204,51,77,0.9);
+        color: rgb(255,255,255);
+    }
+    
+    .in_query_10{
+        background-color: rgba(204,51,77,1);
+        color: rgb(255,255,255);
+    }
+    .legend_tr{
+        /* height: 10px;
+        width: 80px;
+        border: 1px solid rgb(241, 233, 233); */
+    }
+    
+    .in_query_legend{
+        background: linear-gradient(to left, 
+         rgba(204,51,77,0.0) 0%,
+        rgba(204,51,77,0.1) 10%,
+        rgba(204,51,77,0.2) 20%,
+        rgba(204,51,77,0.3) 30%,
+        rgba(204,51,77,0.4) 40%,
+        rgba(204,51,77,0.5) 50%,
+        rgba(204,51,77,0.6) 60%,
+        rgba(204,51,77,0.7) 70%,
+        rgba(204,51,77,0.8) 80%,
+        rgba(204,51,77,0.9) 90%,
+        rgba(204,51,77,1) 100%
+      );
+    }
+    .available_Cell_ForReg{
+        background-color: transparent;
+    }
+
+
+    .in_query_0:hover, 
+    .in_query_1:hover, 
+    .in_query_3:hover, 
+    .in_query_5:hover, 
+    .in_query_7:hover, 
+    .in_query_9:hover, 
+    .in_query_10:hover,
+    .available_Cell_ForReg:hover {
+        cursor: pointer;
+      
+    }
+    
+    td{
+        vertical-align: middle;
+        border-radius: 0px !important;
+    }
+    .delete_btn_all{
+        color: rgb(240, 235, 235);
+    }
+
+    .more_btn{
+        background-color: transparent;
+        border: transparent;
+    }
+
+   
+
+    .table_allocation  td:first-child {
+        border-radius: 10px;
+        border: 1px solid white;
+        text-align: right;
+        min-width: 80px;
+        
+    }
+    
+    .table_allocation  td:last-child {
+        border-radius: 10px;
+        border: 1px solid white;
+        text-align: right;
+        min-width: 80px;
+        
+    }
+    
+
+   .tableShadow tr{
+       border: 2px solid rgb(255, 255, 255); 
+    box-shadow: 3px -2px 2px rgba(0, 0, 0, 0.2);
+   }
+   
+
+   .table_allocation  td:nth-child(2) {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    
+    .table_allocation  td:nth-child(3) {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    
+   
+    .table_allocation  td:nth-child(26) {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .table_allocation{
+        /* font-family: BTraffic; */
+        font-size: small;
+    }
+    .advPartHead{
+        background-color: #3b5998 ;
+    }
+
+    .flex-container {
+        /* display: flex;
+        flex-wrap: wrap; */
+       
+      }
+      .legend_tr{
+        padding: 5px;
+      }
+      .flex-container > div {
+        background-color: transparent;
+        /* width: 33.333%; */
+        /* margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px; */
+      }
+    .flex-container2 {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: rgb(246, 248, 242);
+       
+      }
+      
+      .flex-container2 > .div1 {
+        background-color: #f10e0e;
+        width: 19.333%;
+        /* margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px; */
+      }
+      .flex-container2 > .div2 {
+        background-color: transparent;
+        width: 78.666%;
+        /* border: rgb(248, 150, 235) solid 1px;
+        border-radius: 10px; */
+        /* margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px; */
+      }
+      .flex-container2 > .div3 {
+        background-color: transparent;
+        width: 2%;
+        height: 20px;
+        border: rgb(255, 255, 255) solid 1px;
+        border-radius: 10px;
+        /* margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px; */
+      }
+
+      .regbtn{
+          border-radius: 10px;
+      }
+      .btnok{
+        margin: 20px;
+      }
+      .container {
+        /* margin: 20px 0 0 20px; */
+        cursor: pointer;
+     
+      }
+
+      .prTableRow:hover :nth-child(even) {
+        opacity: .75;
+      }
+      
+      .prTableRow:hover :nth-child(odd)  {
+        opacity: .75;
+      }
+      .box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .box button{
+        
+          margin: 2px;
+      }
+     
+
+      .flex-container1 {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: transparent;
+       
+      }
+      .flex-container1 > .div1 {
+        background-color: transparent;
+        width: 55%;
+        height: 50px;
+        border: rgb(255, 255, 255) solid 1px;
+        border-radius: 10px;
+        margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+      }
+      .flex-container1 > .div2 {
+        background-color: transparent;
+        width: 30%;
+        /* height: 50px; */
+        /* border: rgb(255, 255, 255) solid 1px; */
+        /* border-radius: 10px; */
+        /* margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px; */
+      }
+      .flex-container1 > .div3 {
+        background-color: transparent;
+        /* width: 5%; */
+        /* height: 50px; */
+        border: rgb(255, 255, 255) solid 1px;
+        border-radius: 10px;
+        /* margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px; */
+      }
+      .fl{
+          float: left;
+      }
+     
+
+      #table-wrapper {
+        position:relative;
+      }
+    
+      #table-scroll {
+        height:auto;
+        /* overflow:auto;   */
+        margin:20px auto;
+  
+      }
+      #table-wrapper table {
+        width:100%;
+      
+      }
+     
+      td {
+        white-space: nowrap;
+    }
+
+    .fixTableHead {
+      overflow-y: auto;
+      height: 400px !important;
+     
+      
+    }
+    .fixTableHead thead th {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .table_allocation table {
+      /* border-collapse: collapse;         */
+      width: 100%;
+    }
+    .table_allocation th,
+    td {
+      padding: 8px 15px;
+      border: 2px solid #b0d9db;
+    }
+    .table_allocation th {
+      background: #047aa0;
+      color:#fff;
+    }
+
+    td{
+      border-radius: 50px;
+    }

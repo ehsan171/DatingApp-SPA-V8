@@ -1,0 +1,301 @@
+  <div class="container mt-5">
+      <form [formGroup]='screenplayRegForm'  (ngSubmit)='register()'>
+      <div class="container  text-right">
+
+      
+  <div class="row">
+            
+    <div class="col">
+      <div class="form-group"style="margin-top: 4px;">
+        
+        <ejs-dropdownlist 
+            enableRtl='true' 
+            floatLabelType="Auto" 
+            id='orgStructureId' 
+            #samples [dataSource]='data' 
+            [fields]='orgFields' 
+            formControlName="orgStructure"
+            [placeholder]='textOrgStructure' 
+            (change)="gettingDataGroups($event.value)"
+            ></ejs-dropdownlist>
+
+
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group" style="margin-top: 4px;">
+        <!-- <label for="formatId" >گروه</label> -->
+        <ejs-dropdownlist 
+        enableRtl='true' 
+        floatLabelType="Auto" 
+        id='groupId' 
+        #samples [dataSource]='dataGroup' 
+        [fields]='fieldsGroup' 
+        
+        [placeholder]='textGroup' 
+      
+        (change)="gettingDataBarname($event.value)"
+        
+        >
+        a</ejs-dropdownlist>
+
+      </div>
+    </div>
+
+
+    <div class="col">
+      <div class="form-group" style="margin-top: 4px;">
+        <!-- <label for="formatId" >قالب</label> -->
+        <ejs-dropdownlist 
+        enableRtl='true' 
+        floatLabelType="Auto" 
+        id='barnameId' 
+      
+        #samples [dataSource]='dataBarname' 
+        [fields]='fieldsBarname' 
+        
+        [placeholder]='textBarname' 
+        (change)="gettingDataBarnameById($event.value)"
+        
+        >
+        a</ejs-dropdownlist>
+
+      </div>
+    </div>
+
+
+
+
+
+    
+
+
+  </div>
+
+
+  <div class="row">
+      
+    <div class="col">
+      <div class="form-group"style="margin-top: 4px;" >
+        
+        <div class="e-float-input" >
+          <span class="e-float-text e-label-top" style="color: rgb(160, 159, 159);">تهیه کننده</span>
+              <div style="border-bottom:  1px solid rgb(160, 159, 159); padding-bottom: 6px; " >
+                  <div  *ngFor="let hero of dataProducer">
+            
+              {{hero["name"]}}
+              </div>
+              </div>
+        
+          
+          
+      
+      </div>
+
+
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group"style="margin-top: 4px;">
+        
+        <div class="e-float-input" >
+          <span class="e-float-text e-label-top" style="color: rgb(160, 159, 159);">شماره برآورد</span>
+              <div style="border-bottom:  1px solid rgb(160, 159, 159); padding-bottom: 6px; " >
+                  <div  *ngFor="let hero of dataProducer">
+            
+              {{hero["baravordNo"]}}
+              </div>
+              </div>
+        
+          
+          
+      
+      </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="col">
+      <div class="form-group" style="margin-top: 4px;">
+        <!-- <label for="formatId" >قالب</label> -->
+
+
+      </div>
+    </div>
+
+
+
+
+
+    
+
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <!-- <label for="screenplayTitleId" >عنوان منبع</label> -->
+        
+        <!-- <input type="text" class="form-control" id="screenplayTitleId" placeholder="عنوان فیلمنامه"> -->
+        <ejs-autocomplete 
+        
+        class="" 
+        enableRtl='true' floatLabelType="Auto" 
+        id='screenplayTitleId' formControlName="Title" 
+        loadLabelType="Auto" [dataSource]='titleData' [placeholder]='resourceText'
+        [ngClass]="{'is-invalid':screenplayRegForm.get('Title').errors &&
+          screenplayRegForm.get('Title').touched}">
+      </ejs-autocomplete> 
+      
+          <div  class="invalid-feedback">پرکردن این قسمت ضروری است!</div>
+        
+        
+      </div>
+    </div>
+
+  
+  </div> 
+
+  <div class="row">
+    
+    <div class="col">
+        <span class="e-float-text e-label-top" style="color: rgb(160, 159, 159);">تاریخ شروع</span> 
+      <div class="e-input-group" style="margin-top: 0;">
+        
+      <input id="resourceStartDate" class="e-input example1"
+      type="text" (focus)="focusIn($event['target'])"
+      placeholder = "تاریخ شروع" (blur)="focusOut($event.target)"
+      autocomplete="off"/>
+      <span class="e-input-group-icon e-input-popup-date" (mouseup)="onMouseUp($event.target)" (mousedown)="onMouseDown($event.target)"></span>
+      </div>
+
+        
+    </div>
+
+  </div>
+
+
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <!-- <label for="screenplayTitleId" >عنوان فیلمنامه</label> -->
+        
+        <!-- <input type="text" class="form-control" id="screenplayTitleId" placeholder="عنوان فیلمنامه"> -->
+        <ejs-autocomplete 
+        
+        class="" 
+        enableRtl='true' floatLabelType="Auto" 
+        id='screenplayTitleId' formControlName="Title" 
+        loadLabelType="Auto" [dataSource]='titleData' [placeholder]='text'
+        [ngClass]="{'is-invalid':screenplayRegForm.get('Title').errors &&
+          screenplayRegForm.get('Title').touched}">
+      </ejs-autocomplete> 
+      
+          <div  class="invalid-feedback">پرکردن این قسمت ضروری است!</div>
+        
+        
+      </div>
+    </div>
+
+  
+  </div> 
+        
+        
+
+
+    <div class="">
+      
+    </div>
+    
+        <div class="row">
+    
+          <div class="col">
+            <div class="form-group" style="margin-top: 4px;">
+              <!-- <label for="totalNumberEpisodesId">تعداد قسمت</label> -->
+              <ejs-numerictextbox   format='n0' min=1   mask='9999' enableRtl='true' floatLabelType="Auto" id='totalNumberEpisodesId' formControlName="totalNumberEpisodes" [placeholder]='textTotalNumberEpisodes'></ejs-numerictextbox >
+            </div>
+          </div>
+    
+          <div class="col">
+            <div class="form-group" style="margin-top: 4px;">
+              <!-- <label for="formatId" >قالب</label> -->
+              <ejs-dropdownlist 
+              enableRtl='true' 
+              floatLabelType="Auto" 
+              id='formatId' 
+              #samples [dataSource]='dataFormat' 
+              [fields]='fieldsFormat' 
+              formControlName="format" 
+              [placeholder]='textFormat' 
+              [allowFiltering]='true' 
+              (filtering)='onFilteringFormat($event)'>a</ejs-dropdownlist>
+    
+            </div>
+          </div>
+    
+          <div class="col">
+            <div class="form-group">
+              <!-- <label for="genreId">ژانر</label> -->
+              <ejs-multiselect enableRtl='true' floatLabelType="Auto" id='genreId' #samples [dataSource]='dataGenre' [fields]='fieldsGenre' formControlName="genre" [placeholder]='textGenre' [allowFiltering]='true' (filtering)='onFilteringGenre($event)'>a</ejs-multiselect>
+    
+            </div>
+          </div>
+          
+        </div>
+    
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <!-- <label for="statusId" >وضعیت</label> -->
+              <ejs-dropdownlist enableRtl='true' floatLabelType="Auto" id='statusId' #samples [dataSource]='dataStatus' [fields]='fieldsStatus' formControlName="statusId" [placeholder]='textStatus' [allowFiltering]='true' (filtering)='onFilteringStatus($event)'>a</ejs-dropdownlist>
+    
+            </div>
+          </div>
+    
+          <div class="col">
+          
+    <input id='exa2' formControlName="regDate" style="display: none;"> 
+            
+          </div >
+    
+        
+    
+          <div class="col">
+          
+                    <div class="e-input-group" style="margin-top: 18px;">
+    
+                    <input id="exa" class="e-input example1"
+                    type="text" (focus)="focusIn($event.target)"
+                    placeholder = "تاریخ ثبت" (blur)="focusOut($event.target)"
+                    autocomplete="off"/>
+                    <span class="e-input-group-icon e-input-popup-date" (mouseup)="onMouseUp($event.target)" (mousedown)="onMouseDown($event.target)"></span>
+                    </div>
+                  </div>
+    
+                  <!-- <ejs-textbox class="example1" enableRtl='true' floatLabelType="Auto" id='totalNumberEpisodesId' formControlName="totalNumberEpisodes" [placeholder]='textTotalNumberEpisodes'></ejs-textbox> -->
+    
+            
+          </div>
+          
+        </div>
+    
+      
+      
+    
+    
+    
+    
+    
+      <div class="form-group text-center">
+        <button class="btn btn-success regbtn" type="submit">ثبت</button>
+        <button class="btn btn-default" type="button" (click)='cancel()'>انصراف</button>
+      </div>
+      
+    </form>
+    </div>

@@ -1,0 +1,120 @@
+
+<ng-container *ngIf="screenplay">
+<div class="container mt-20 ">
+  <div class="row">
+      <div class="col-sm-3 ">
+          <div class="right-box">
+          <div class="mt-2 col-r-d">
+            <strong style="line-height: BTraffic;">عنوان فیلمنامه:</strong>
+            <span class="trfont">{{screenplay[0].title || '--'}}</span>
+          
+          </div>
+          
+          <div  class="mt-2 col-r-d">
+            <strong>شماره برآورد:</strong>
+            <span class="num">{{screenplay[0]['baravordNo']  || '--'}}</span>
+          
+          </div>
+          
+          <div class="mt-2 col-r-d">
+            <strong>تهیه کننده :</strong>
+          
+                <span>
+                    {{dataScreenplay[0]['producer']  || '--'}}&nbsp;&nbsp;
+                </span>
+            
+          </div>
+        
+          <div class="mt-2 col-r-d">
+            <strong>نویسنده :</strong>
+          
+                <span>
+                    {{dataScreenplay[0]["writer"] || '--'}}
+                </span>
+            
+          </div>
+          <div class="mt-2 col-r-d">
+            <strong>واحد :</strong>
+          
+                <span>
+                    {{dataScreenplay[0]['orgStructure'] || '--'}}
+                </span>
+            
+          </div>
+          <div class="mt-2 col-r-d">
+            <strong>قالب :</strong>
+          
+                <span>
+                    {{dataScreenplay[0]['format'] || '--'}}
+                </span>
+            
+          </div>
+          <div class="mt-2 col-r-d">
+            <strong>ژانر :</strong>
+          
+                <span>
+                    {{dataScreenplay[0]['genre']}}
+                </span>
+            
+          </div>
+        
+          <div class="mt-2" >
+            <strong>وضعیت &nbsp; :</strong>
+            <span class="">{{screenplay[0]['status']}}</span>
+          
+          </div>
+       
+      </div>
+     
+
+      </div>
+      <div class="col-sm-9 bb mr"  >
+        <div class="container mt-5">
+ 
+<!--         
+          <tabset>
+            <tab heading="لیست قسمت های فیلمنامه  «{{screenplay[0]['title']}}»" id="tab1">
+
+              <app-episode-all [valuesFromDetail]="values"></app-episode-all>
+              
+              
+             
+             
+            </tab>
+
+            
+            <tab heading="ثبت اطلاعات قسمت ها">
+              <div class="container mt-5">
+               <app-episode-reg [valuesFromDetail]="values"></app-episode-reg>
+              </div>
+              <!-- 
+              <p>From value: {{screenplayRegForm.value | json}}</p>
+              <p>From status: {{screenplayRegForm.status | json}}</p> -->  
+            <!-- </tab>
+
+
+            <tab heading="ویرایش اطلاعات فیلمنامه «{{screenplay[0]['title']}}»"> -->
+              <!-- <div class="container mt-5">
+               <app-screenplay-edit2 [valuesFromDetail]="values"></app-screenplay-edit2>
+              </div> -->
+              
+              <!-- 
+              <p>From value: {{screenplayRegForm.value | json}}</p>
+              <p>From status: {{screenplayRegForm.status | json}}</p> -->  
+            <!-- </tab>
+
+
+
+          </tabset>
+           -->
+           -->
+          
+          
+        
+        </div>
+        
+
+      </div>
+  </div>
+</div>
+</ng-container>
