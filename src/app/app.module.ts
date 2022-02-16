@@ -43,6 +43,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { LogOutComponent } from './log-out/log-out.component';
 import { TestComponent } from './test/test.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [
@@ -94,7 +96,10 @@ import { AgGridModule } from 'ag-grid-angular';
     MatCheckboxModule,
     MatIconModule,
     NgxSpinnerModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    FontAwesomeModule,
+    AngularSvgIconModule.forRoot()
+
   ],
   providers: [
     AuthService,

@@ -517,3 +517,12 @@
     background: white;
     }
 
+    ::ng-deep .mat-checkbox-label {
+      /* width: 20px; */
+      margin-right: 10px;
+      margin-left: 20px;
+   }
+    ::ng-deep .mat-checkbox {
+      /* width: 20px; */
+
+   }

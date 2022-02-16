@@ -199,249 +199,10 @@
       
      
      </div>
-  <div class="flex-container ">
-   <div
-   style="">
-           <table style="text-align: center;">
-           <!-- <thead>
-             <tr>
-               <th>قبلاٌ انتخاب کرده‌اید</th>
-               <th>نداشتن ظرفیت</th>
-               <th>انتخاب</th>
-               <th>صف تقاضا</th>
-         
-             </tr>
-           </thead> -->
-           <tbody>
-             <!-- <tr>
-               <td class="accepted legend_tr"  ></td>
-               <td class="prim_reg legend_tr"  ></td>
-               <td class="unavailable_Cell_ForReg legend_tr"></td>
-               <td class="selected_Cell_ForReg legend_tr"></td>
-               <td class="in_query_legend legend_tr"></td>
-           
-             </tr> -->
-             <tr>
-               
-               <th class="accepted legend_tr col-2" >تخصیص داده شده</th>
-               <th class="prim_reg legend_tr col-2" >قبلاٌ انتخاب کرده‌اید</th>
-               <th class="unavailable_Cell_ForReg  col-2 legend_tr">نداشتن ظرفیت</th>
-               <th class="selected_Cell_ForReg   col-2 legend_tr">انتخاب</th>
-               <th class="in_query_legend legend_tr  col-2 ">صف تقاضا</th>
-         
-             </tr>
-             <!-- <tr>
-               <td class="accepted legend_tr"></td>
-               <td class="prim_reg legend_tr"></td>
-               <td class="unavailable_Cell_ForReg legend_tr"></td>
-               <td class="selected_Cell_ForReg legend_tr"></td>
-               <td class="in_query_legend legend_tr"></td>
-           
-             </tr> -->
-           </tbody>
-         </table> 
-   </div>
  
-  
-   <div  class="flex-container1" [@openClose]="isShown ? 'open' : 'closed'">
- <div class="div1 fl"></div>
-       <div class="div2 fl">
-           <ejs-multiselect enableRtl='true' #checkboxForDaySelection floatLabelType="Auto" id='dayId' #samples [dataSource]='dataDay' [fields]='fieldsDay' formControlName="day" [placeholder]='textDay' [allowFiltering]='true' >a</ejs-multiselect>
-     
-       </div>
-       <div class="div3 fl" style="vertical-align: middle;">
-             <button
-             style="   margin-top: 45%; "
-             class="btn btn-primary"
-             (click)="daySelectFunc()">انتخاب روز</button>
-     </div>
+
  
- 
- </div>
- </div>
- 
- 
-   <div class="flex-container2">
-   <div class="div1"
-   style="background-color: transparent;">
-    
-   </div>
-   <div class="div2" 
-   style="display: flex;
-   justify-content: center;
-   background-color: transparent;">
-  ساعت
-   </div>
- 
-   <div  class="div3" >
-     <button class=" more_btn " 
-     style="margin-bottom: 20px;"
-     (click)="divFunction()">
-       <mat-icon color = "" >more_horiz</mat-icon>
-     </button>
-   </div>
-  
- 
-   
- </div>
- 
- 
- 
- <div id="table-wrapper">
-   <div id="table-scroll" class="fixTableHead">
-         <table  class='table  table-sm tableShadow table_allocation'  aria-labelledby="tableLabel" style=" border:1px solid;  user-select: none; text-align: center; ">  
- 
-                 
-       <thead style="background-color: #d7bde2;">  
-         <tr>  
-           <th scope="col" *ngFor="let column of header">  
-       
-             {{column === 'activity' ? 'فعالیت' : (column === 'hour' ? 'روز' :column) }}  
-           </th>
-           
-           
-         
-             
-           <th   
-           [@openClose]="isShown ? 'open' : 'closed'"
-           class="advPartHead"  > 
-             <mat-checkbox [aria-label]="" 
-                 name="checkedAll"
-                 value=""
-                 (click)="selectAll()"
-                 [(ngModel)]="selectAllDays"
-                 class="delete_btn_all">
-               
-             </mat-checkbox>
-   
-             
-           </th> 
- 
-           <th   
-           [@openClose]="isShown ? 'open' : 'closed'"
-           class="advPartHead">
-         <button 
-           style="background-color: transparent; border: transparent;"
-           (click)="deleteAll(resourceId, year, month,  barnameId)">
-             <mat-icon color = "warn" class="delete_btn delete_btn_all">
-               delete
-             </mat-icon>
-           
-           </button>
-           </th> 
-           <th   
-           [@openClose]="isShown ? 'open' : 'closed'"
-           class="advPartHead delete_btn_all" >
-           <button 
-           style="background-color: transparent; border: transparent;"
-           >
-           <mat-icon color = "primary"
-           class="delete_btn_all" >
-           file_copy
-             </mat-icon>
-           
-           </button>
-           </th>
-         
-           <th   
-           [@openClose]="isShown ? 'open' : 'closed'"
-           class="advPartHead" >
-             <button 
-             style="background-color: transparent; border: transparent;"
-             (click)="pasteAll()">
-             <mat-icon color = "primary"
-             class="delete_btn_all" >
-               format_paint
-               </mat-icon>
-             
-             </button>
-           </th>
- 
-           <th>{{header[0]=== 'hour' ? 'روز' :header[0]}}</th>
- 
- 
-         
-         
-         
-           </tr>  
-       </thead>  
-       <tbody>  
-       
-         <tr class="prTableRow" 
-         *ngFor="let row of RowsData| slice:1;let indexOfElement=index;"
-         (contextmenu)="onRightClick($event, {content: indexOfElement })">  
-             <td  
-           
-             (mouseover)="onCellClick( indexOfElement, column )" 
-             (mousedown)="onCellClickSingleClick( indexOfElement, column,$event )" 
-             ondragstart="return false;" ondrop="return false;"
-             *ngFor="let column of header"
-     
-             
-                       
-             [ngClass]="
-             (column != 'hour' && IsCellClickForEachBarname[indexOfElement]['accepted'][column])? 'accepted'
-             :(column != 'hour' && IsCellClickForEachBarname[indexOfElement]['waiting'][column])? 'prim_reg'
-             :(column != 'hour' && IsCellClick[indexOfElement][column])? 'selected_Cell_ForReg'
-             :(column != 'activity' && column != 'hour' && RowsData[indexOfElement+1][column] < requestVolume )? 'unavailable_Cell_ForReg'
-             :(column != 'hour' && RowsDataForColor[indexOfElement+1][column] >= requestVolume )? 'available_Cell_ForReg'
-             : (column == 'hour')? 'table_head': 'in_query_'+math.round(math.max(math.min((requestVolume-RowsDataForColor[indexOfElement+1][column])/10,10),0))" 
-     
-     
-             > 
-           
-           {{row[column]}}
-           </td> 
-         
-           <td   [@openClose]="isShown ? 'open' : 'closed'"  >
-             <mat-checkbox [aria-label]="" 
-           
-               value="{{selectedDaysForDeletion[indexOfElement].value}}"
-               [(ngModel)]="selectedDaysForDeletion[indexOfElement].checked">
-             </mat-checkbox>
-           </td>
- 
-           <td   [@openClose]="isShown ? 'open' : 'closed'">            
-             <button 
-               style="background-color: transparent; border: transparent;"
-               (click)="deleteRequestConform(resourceId, year, month, indexOfElement+1, barnameId)">
-               <mat-icon color = "warn" class="delete_btn">
-                 delete
-               </mat-icon>
-             </button>
-           </td>
-           
- 
-           <td   [@openClose]="isShown ? 'open' : 'closed'"  >
-             <button 
-               style="background-color: transparent; border: transparent;"
-               (click)="copyRowPattern( indexOfElement+1)">
-     
-                   <mat-icon color = "primary" class="delete_btn">
-                     file_copy
-                   </mat-icon>
-               
-             </button>
-           </td>
- 
-           <td   [@openClose]="isShown ? 'open' : 'closed'" >
-             <mat-checkbox [aria-label]="" 
-                 value="{{selectedDaysForPaste[indexOfElement].value}}"
-                 [(ngModel)]="selectedDaysForPaste[indexOfElement].checked">
-             </mat-checkbox>
-           </td>
- 
-           <td [ngClass]="'table_head'">
-             {{RowsData[indexOfElement+1]['hour']}}
-           </td>
- 
-         </tr>  
-       </tbody>  
- </table> 
-   </div>
-   </div>
- 
- 
+
  
      
    
@@ -455,7 +216,11 @@
         *ngFor="let cd of columnDefinitionsFormTest"  
         style="width: 150px;"
         [formControlName]="cd.def">
-        {{cd.label}}
+        <img src='../../assets/library/images/icon/{{cd.icon}}' alt="icon" width="20" height="20">
+        <!-- {{cd.label}}  -->
+
+        
+        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon> -->
       </mat-checkbox>
     </form>
     <div style="">
@@ -464,7 +229,7 @@
             aria-label="Select page of periodic elements">
       </mat-paginator> -->
 
-      <div  class="flex-container1" [@openClose]="isShown ? 'open' : 'closed'">
+      <div  class="flex-container1" >
         <div class="div1 fl"></div>
               <div class="div2 fl">
                   <ejs-multiselect enableRtl='true' #checkboxForDaySelection floatLabelType="Auto" id='dayId' #samples [dataSource]='dataDay' [fields]='fieldsDay' formControlName="day" [placeholder]='textDay' [allowFiltering]='true' >a</ejs-multiselect>
@@ -479,7 +244,29 @@
         
         
         </div>
- 
+        <div class="flex-container ">
+          <div>
+                  <table style="text-align: center;">
+       
+                  <tbody>
+       
+                    <tr>
+                      
+                      <th class="accepted legend_tr col-2" >تخصیص داده شده</th>
+                      <th class="prim_reg legend_tr col-2" >قبلاٌ انتخاب کرده‌اید</th>
+                      <th class="unavailable_Cell_ForReg  col-2 legend_tr">نداشتن ظرفیت</th>
+                      <th class="selected_Cell_ForReg   col-2 legend_tr">انتخاب</th>
+                      <th class="in_query_legend legend_tr  col-2 ">صف تقاضا</th>
+                
+                    </tr>
+       
+                  </tbody>
+                </table> 
+          </div>
+        
+         
+       
+        </div>
     <mat-table class="mat-elevation-z8 disable-text-selection" [dataSource]="dataSource3"
     (mousedown)="mouseClickDown($event)"
     (mouseup)="mouseClickUp($event)" >

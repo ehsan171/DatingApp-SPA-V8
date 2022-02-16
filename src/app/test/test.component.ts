@@ -15,6 +15,8 @@ import { AllocationRegister } from '../_models/allocationRegister';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var $: any;
 class Todo {
@@ -62,6 +64,7 @@ class MyTable {
   ],
 })
 export class TestComponent implements OnInit{
+  
   options = [
     {name:'OptionA', value:'1', checked:true},
     {name:'OptionB', value:'2', checked:false},
@@ -240,9 +243,15 @@ math = Math;
   selectedOption: string;
   selectedCapacity: number;
   constructor(
+    iconRegistry: MatIconRegistry, 
+    domSanitizer: DomSanitizer,
     public renderer: Renderer2,
     private resourceService: ResourceService,
   ) {
+
+    iconRegistry.addSvgIconSet(
+      domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg')
+    );
     const todos: Todo[] = [
       { idTest: '123', description: 'Complete me!', complete: false },
       { idTest: '456', description: 'Complete me!2', complete: false },
@@ -1158,12 +1167,12 @@ cancelRegisterMode(event: string){
     { def: 'advancedTool4', label: 'advancedTool4', hide: this.hour1.value},
   ]
   columnDefinitionsFormTest = [
-    { def: 'day',    label:'روز',  hide: this.day.value},
-    { def: 'activity', label: 'فعالیت', hide: this.activity.value},
-    { def: 'hour1',   label:'صبح', hide: this.hour1.value},
-    { def: 'hour2',  label:'عصر',hide: this.hour1.value},
-    { def: 'hour3',  label:'شب',  hide: this.hour1.value},
-    { def: 'advancedTool',  label:'ابزار پیشرفته',  hide: this.hour1.value},
+    // { def: 'day',    label:'روز',  hide: this.day.value},
+    { def: 'activity', label: 'فعالیت',icon:'activity.png', hide: this.activity.value},
+    { def: 'hour1',   label:'صبح',icon:'sunset.png',hide: this.hour1.value},
+    { def: 'hour2',  label:'عصر',icon:'morning.png',hide: this.hour1.value},
+    { def: 'hour3',  label:'شب',icon:'night.png',  hide: this.hour1.value},
+    { def: 'advancedTool',  label:'ابزار پیشرفته',icon:'tools.png',  hide: this.hour1.value},
     
   ]
 
