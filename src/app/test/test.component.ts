@@ -14,6 +14,7 @@ import * as moment from 'jalali-moment';
 import { AllocationRegister } from '../_models/allocationRegister';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { MatPaginator } from '@angular/material/paginator';
 
 declare var $: any;
 class Todo {
@@ -25,6 +26,10 @@ class MyTable {
   day: string;
   activity: string;
   hour: number[];
+  advancedTool: string;
+  advancedTool2: string;
+  advancedTool3: string;
+  advancedTool4: string;
 } 
 @Component({
   selector: 'app-test',
@@ -131,6 +136,9 @@ export class TestComponent implements OnInit{
 
   
   }
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  
   @ViewChild('checkboxForDaySelection', { static: true })
   public mulObj: MultiSelectComponent; 
 
@@ -228,7 +236,7 @@ math = Math;
   mousedown: any;
   mouseup: any;
   clickDown: boolean = false;
-
+  my_table2: MyTable[];
   selectedOption: string;
   selectedCapacity: number;
   constructor(
@@ -241,13 +249,16 @@ math = Math;
       { idTest: '789', description: 'Complete me!3', complete: false },
     ];
     const my_table: MyTable[] = [
-      { day: 'شنبه', activity: 'فعالیت 1', hour: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,18,19,20,21,22,23,24] },
-      { day: 'یکشنبه', activity: 'فعالیت 2', hour: [10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,180,190,200,210,220,230,240] },
-      { day: 'دوشنبه', activity: 'Complete me!', hour: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,18,19,20,21,22,23,24] },
+      { day: "this.RowsData[1]['hour']", activity: ' فعالیت 1، فعالیت 2،فعالیت 3', hour: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,18,19,20,21,22,23,24], advancedTool:'1' , advancedTool2:'1', advancedTool3:'1', advancedTool4:'1' },
+      { day: 'یکشنبه', activity: 'فعالیت 2', hour: [10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,180,190,200,210,220,230,240], advancedTool:'2', advancedTool2:'2' , advancedTool3:'2', advancedTool4:'2' },
+      { day: 'دوشنبه', activity: 'Complete me!', hour: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,18,19,20,21,22,23,24], advancedTool:'3', advancedTool2:'3', advancedTool3:'3', advancedTool4:'3'  },
 
     ];
+
+    this.my_table2 = [];
     this.dataSource = new MatTableDataSource(todos);
     this.dataSource2 = new MatTableDataSource(my_table);
+    this.dataSource3 = new MatTableDataSource(this.my_table2);
   }
 
   @Input() valuesFromDetail: any;
@@ -337,12 +348,12 @@ math = Math;
             this.clickDown = true;
             
           }
-          console.log("mouse:   "+this.clickDown +" from down  " + event.which)
+          console.log("3000mouse:   "+this.clickDown +" from down  " + event.which)
         }
         mouseClickUp(event: { which: number; }){
           if(event.which == 1){
             this.clickDown = false;
-            
+            console.log("30002mouse:   "+this.clickDown +" from down  " + event.which)
           }
 
         }
@@ -405,6 +416,10 @@ math = Math;
             for (let i = 1; i <= 24;i++){
               this.header.push(i)
             }
+            this.header.push('advancedTool')
+            this.header.push('advancedTool2')
+            this.header.push('advancedTool3')
+            this.header.push('advancedTool4')
             this.RowsData = [ ]  
             this.IsCellClick = [ ]  
           
@@ -426,13 +441,15 @@ math = Math;
 
           let myDate =(year.toString()+formattedMonth.toString()+formattedNumber.toString())
     
+
       this.test =   
                 {  
-                  "hour" : moment(myDate,"jYYYYjMMjDD",'fa').format('ddd, ll'),
+                  "hour" : moment(myDate,"jYYYYjMMjDD",'fa').format('ddd, ll').slice(0, -5),
                   "activity":""
         
                 }
-              
+                this.my_table2.push(      { day: moment(myDate,"jYYYYjMMjDD",'fa').format('ddd, ll').slice(0, -5), activity: ' فعالیت 1، فعالیت 2،فعالیت 3', hour: [] , advancedTool:'5', advancedTool2:'5', advancedTool3:'5', advancedTool4:'5' })
+                this.dataSource3 = new MatTableDataSource(this.my_table2);
       this.test2 =   
                 {  
                   "hour" : index
@@ -450,6 +467,7 @@ math = Math;
               for (let index2 = 1; index2 <= 24; index2++) {
                   this.RowsData[index][index2] = this.resourceInfo[0]['resourceCapacity'];
                   this.IsCellClick [index][index2] = false;
+                  // this.my_table2[index]['hour'][index2-1] = this.resourceInfo[0]['resourceCapacity'];
               }
           
                    
@@ -458,6 +476,19 @@ math = Math;
 
               this.RowsData[this.allocation[index].day][this.allocation[index].hour]-=this.allocation[index].usedUnit;
               // this.IsCellClick[this.allocation[index].hour][this.allocation[index].day]=false;
+
+              // this.my_table2[this.allocation[index].day]['hour'][this.allocation[index].hour] = this.RowsData[this.allocation[index].day][this.allocation[index].hour];
+
+            }
+            for (let index = 0; index < this.RowsData.length; index++) {
+
+              // this.RowsData[this.allocation[index].day][this.allocation[index].hour]-=this.allocation[index].usedUnit;
+              // this.IsCellClick[this.allocation[index].hour][this.allocation[index].day]=false;
+
+              this.my_table2[index]['day'] = this.RowsData[index+1]['hour'];
+              for (let i = 0; i < 24; i++){
+                this.my_table2[index]['hour'][i] = this.RowsData[index+1][i+1]
+              }
 
             }
             //this.RowsData.shift()
@@ -618,12 +649,12 @@ math = Math;
         
   this.year=1400;this.month=4;
             let myDate =(year.toString()+formattedMonth.toString()+formattedNumber.toString())
-            console.log("2003",myDate)
-            console.log("2004",moment(myDate,"jYYYYjMMjDD",'fa').format('ddd, ll'))
-            console.log('2005',moment(myDate,"jYYYYjMMjDD",'fa').format('d'))
+            // console.log("2003",myDate)
+            // console.log("2004",moment(myDate,"jYYYYjMMjDD",'fa').format('ddd, ll'))
+            // console.log('2005',moment(myDate,"jYYYYjMMjDD",'fa').format('d'))
 
    
-            console.log("2003",this.year,this.month, index)
+            // console.log("2003",this.year,this.month, index)
             let dayPaste =   
             {name:index, value:index, checked:false, dayName:moment(myDate,"jYYYYjMMjDD",'fa').format('d')}
    
@@ -662,7 +693,7 @@ math = Math;
             
         }
         // this.dataSource2 = new MatTableDataSource(this.RowsData);
-        console.log("10001",this.dataSource2)
+       
 
       }
 
@@ -754,7 +785,9 @@ math = Math;
         }
 
         onCellClick(rowIndex: number,columnIndex: number){
-          
+          console.log('30001',rowIndex)
+          console.log('30002',columnIndex)
+          console.log('30002',this.clickDown)
           rowIndex +=1;
           if(this.clickDown){
               if(this.requestVolume <= this.RowsData[rowIndex][columnIndex])
@@ -1060,12 +1093,30 @@ cancelRegisterMode(event: string){
     description: new FormControl(false)
   });
 
+  formTest:FormGroup = new FormGroup({
+    day: new FormControl(false),
+    activity: new FormControl(false),
+    hour1: new FormControl(false),
+    hour2: new FormControl(false),
+    hour3: new FormControl(false),
+    advancedTool: new FormControl(false),
+  });
+
+  day = this.formTest.get('day');
+  activity = this.formTest.get('activity');
+  hour1 = this.formTest.get('hour1');
+  hour2 = this.formTest.get('hour2');
+  hour3 = this.formTest.get('hour3');
+  advancedTool = this.formTest.get('advancedTool');
+  
+
   idTest = this.form.get('idTest');
   description = this.form.get('description');
 
 
 
   columns: string[];
+  columnsTest: string[];
   /**
    * Control column ordering and which columns are displayed.
    */
@@ -1075,31 +1126,133 @@ cancelRegisterMode(event: string){
     { def: 'description', label: 'Description', hide: this.description.value}
   ]
   columnDefinitionsTest = [
-    { def: 'day', label: 'Day', hide: this.idTest.value},
-    { def: 'hour', label: 'Description', hide: this.description.value},
-    { def: 'activity', label: 'Description', hide: this.description.value},
+    { def: 'day',    label:'day',  hide: this.day.value},
+    { def: 'activity', label: 'Activity', hide: this.activity.value},
+    { def: 'hour1',  label:'hour1', hide: this.hour1.value},
+    { def: 'hour2',  label:'hour2',hide: this.hour1.value},
+    { def: 'hour3',  label:'hour3',  hide: this.hour1.value},
+    { def: 'hour4',  label:'hour4',  hide: this.hour1.value},
+    { def: 'hour5',  label:'hour5',  hide: this.hour1.value},
+    { def: 'hour6',  label:'hour6',  hide: this.hour1.value},
+    { def: 'hour7',  label:'hour7',  hide: this.hour1.value},
+    { def: 'hour8',  label:'hour8',  hide: this.hour1.value},
+    { def: 'hour9',  label:'hour9',  hide: this.hour1.value},
+    { def: 'hour10', label: 'hour10', hide: this.hour1.value},
+    { def: 'hour11', label: 'hour11', hide: this.hour1.value},
+    { def: 'hour12', label: 'hour12', hide: this.hour1.value},
+    { def: 'hour13', label: 'hour13', hide: this.hour1.value},
+    { def: 'hour14', label: 'hour14', hide: this.hour1.value},
+    { def: 'hour15', label: 'hour15', hide: this.hour1.value},
+    { def: 'hour16', label: 'hour16', hide: this.hour1.value},
+    { def: 'hour17', label: 'hour17', hide: this.hour1.value},
+    { def: 'hour18', label: 'hour18', hide: this.hour1.value},
+    { def: 'hour19', label: 'hour19', hide: this.hour1.value},
+    { def: 'hour20', label: 'hour20', hide: this.hour1.value},
+    { def: 'hour21', label: 'hour21', hide: this.hour1.value},
+    { def: 'hour22', label: 'hour22', hide: this.hour1.value},
+    { def: 'hour23', label: 'hour23', hide: this.hour1.value},
+    { def: 'hour24', label: 'hour24', hide: this.hour1.value},
+    { def: 'advancedTool', label: 'advancedTool', hide: this.hour1.value},
+    { def: 'advancedTool2', label: 'advancedTool2', hide: this.hour1.value},
+    { def: 'advancedTool3', label: 'advancedTool3', hide: this.hour1.value},
+    { def: 'advancedTool4', label: 'advancedTool4', hide: this.hour1.value},
+  ]
+  columnDefinitionsFormTest = [
+    { def: 'day',    label:'روز',  hide: this.day.value},
+    { def: 'activity', label: 'فعالیت', hide: this.activity.value},
+    { def: 'hour1',   label:'صبح', hide: this.hour1.value},
+    { def: 'hour2',  label:'عصر',hide: this.hour1.value},
+    { def: 'hour3',  label:'شب',  hide: this.hour1.value},
+    { def: 'advancedTool',  label:'ابزار پیشرفته',  hide: this.hour1.value},
+    
   ]
 
   getDisplayedColumns() {
+    console.log('20003', "test2")
     this.columns = this.columnDefinitions.filter(cd=>!cd.hide).map(cd=>cd.def);
+  }
+  
+  getDisplayedColumnsTest() {
+    console.log('20003', "test")
+    this.columnsTest = this.columnDefinitionsTest.filter(cd=>!cd.hide).map(cd=>cd.def);
   }
   
   dataSource: MatTableDataSource<Todo>;
   dataSource2: MatTableDataSource<MyTable>;
+  dataSource3: MatTableDataSource<MyTable>;
+
   ngAfterViewInit() {
+    this.dataSource3.paginator = this.paginator;
+
+    console.log('20003', 'test3')
    let o1:Observable<boolean> = this.idTest.valueChanges;
    let o2:Observable<boolean> = this.description.valueChanges;
 
    merge(o1, o2).subscribe( v=>{
    this.columnDefinitions[0].hide = this.idTest.value;
    this.columnDefinitions[1].hide = this.description.value;  
-      console.log(this.columnDefinitions);
+      console.log('20002',this.columnDefinitions);
  
       this.getDisplayedColumns();
+    
     });
 
     this.getDisplayedColumns();
+
+    let o1Test:Observable<boolean> = this.day.valueChanges;
+    let o2Test:Observable<boolean> = this.activity.valueChanges;
+    let o3Test:Observable<boolean> = this.hour1.valueChanges;
+    let o4Test:Observable<boolean> = this.hour2.valueChanges;
+    let o5Test:Observable<boolean> = this.hour3.valueChanges;
+    let o6Test:Observable<boolean> = this.advancedTool.valueChanges;
+ 
+    merge(o1Test, o2Test, o3Test, o4Test, o5Test, o6Test).subscribe( v=>{
+    this.columnDefinitionsTest[0].hide = this.day.value;
+    this.columnDefinitionsTest[1].hide = this.activity.value;  
+    this.columnDefinitionsTest[2].hide = this.hour1.value;  
+    this.columnDefinitionsTest[3].hide = this.hour1.value;  
+    this.columnDefinitionsTest[4].hide = this.hour1.value;  
+    this.columnDefinitionsTest[5].hide = this.hour1.value;  
+    this.columnDefinitionsTest[6].hide = this.hour1.value;  
+    this.columnDefinitionsTest[7].hide = this.hour1.value;  
+    this.columnDefinitionsTest[8].hide = this.hour1.value;  
+    this.columnDefinitionsTest[9].hide = this.hour1.value;  
+    this.columnDefinitionsTest[10].hide = this.hour2.value;  
+    this.columnDefinitionsTest[11].hide = this.hour2.value;  
+    this.columnDefinitionsTest[12].hide = this.hour2.value;  
+    this.columnDefinitionsTest[13].hide = this.hour2.value;  
+    this.columnDefinitionsTest[14].hide = this.hour2.value;  
+    this.columnDefinitionsTest[15].hide = this.hour2.value;  
+    this.columnDefinitionsTest[16].hide = this.hour2.value;  
+    this.columnDefinitionsTest[17].hide = this.hour2.value;  
+    this.columnDefinitionsTest[18].hide = this.hour3.value;  
+    this.columnDefinitionsTest[19].hide = this.hour3.value;  
+    this.columnDefinitionsTest[20].hide = this.hour3.value;  
+    this.columnDefinitionsTest[21].hide = this.hour3.value;  
+    this.columnDefinitionsTest[22].hide = this.hour3.value;  
+    this.columnDefinitionsTest[23].hide = this.hour3.value;  
+    this.columnDefinitionsTest[24].hide = this.hour3.value;  
+    this.columnDefinitionsTest[25].hide = this.hour3.value;  
+    this.columnDefinitionsTest[26].hide = this.advancedTool.value;  
+    this.columnDefinitionsTest[27].hide = this.advancedTool.value;  
+    this.columnDefinitionsTest[28].hide = this.advancedTool.value;  
+    this.columnDefinitionsTest[29].hide = this.advancedTool.value;  
+   
+       console.log('20001',this.columnDefinitionsTest);
+       console.log('200012',this.dataSource2);
+  
+       this.getDisplayedColumnsTest();
+     });
+ 
+     this.getDisplayedColumnsTest();
+    
   }
+  
+
+  
+  
+  
+  
   columnDefs = [
     { headerName: 'make', field: 'make' },
     { headerName: 'model', field: 'model' },

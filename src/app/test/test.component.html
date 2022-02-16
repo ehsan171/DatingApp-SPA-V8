@@ -450,29 +450,184 @@
  
 <div>
 
-    <form [formGroup]="form">
-        <mat-checkbox *ngFor="let cd of columnDefinitionsTest"  [formControlName]="cd.def">{{cd.label}}</mat-checkbox>
+    <form [formGroup]="formTest">
+        <mat-checkbox 
+        *ngFor="let cd of columnDefinitionsFormTest"  
+        style="width: 150px;"
+        [formControlName]="cd.def">
+        {{cd.label}}
+      </mat-checkbox>
     </form>
+    <div style="">
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+            showFirstLastButtons 
+            aria-label="Select page of periodic elements">
+      </mat-paginator> -->
+
+      <div  class="flex-container1" [@openClose]="isShown ? 'open' : 'closed'">
+        <div class="div1 fl"></div>
+              <div class="div2 fl">
+                  <ejs-multiselect enableRtl='true' #checkboxForDaySelection floatLabelType="Auto" id='dayId' #samples [dataSource]='dataDay' [fields]='fieldsDay' formControlName="day" [placeholder]='textDay' [allowFiltering]='true' >a</ejs-multiselect>
+            
+              </div>
+              <div class="div3 fl" style="vertical-align: middle;">
+                    <button
+                    style="   margin-top: 45%; "
+                    class="btn btn-primary"
+                    (click)="daySelectFunc()">انتخاب روز</button>
+            </div>
+        
+        
+        </div>
+ 
+    <mat-table class="mat-elevation-z8 disable-text-selection" [dataSource]="dataSource3"
+    (mousedown)="mouseClickDown($event)"
+    (mouseup)="mouseClickUp($event)" >
     
-    <mat-table class="mat-elevation-z8" [dataSource]="dataSource2" style="width: 500px;">
-        <ng-container matColumnDef="idTest" >
-            <mat-header-cell *matHeaderCellDef> تست روز</mat-header-cell>
+       
+    
+    <ng-container matColumnDef="day" >
+            <mat-header-cell *matHeaderCellDef>  روز</mat-header-cell>
             <mat-cell *matCellDef="let row;">{{row.day}}</mat-cell>
         </ng-container>
-        <ng-container matColumnDef="hour">
-          <mat-header-cell *matHeaderCellDef>ساعت</mat-header-cell>
-          <mat-cell *matCellDef="let row;">llllll</mat-cell>
+        
+        <ng-container matColumnDef="activity">
+          <mat-header-cell *matHeaderCellDef>فعالیت</mat-header-cell>
+          <mat-cell *matCellDef="let row;">
+            <button class="activityClass" title=" {{row.activity}}"> {{row.activity}}</button>
+           
+          </mat-cell>
       </ng-container>
-        <ng-container matColumnDef="description">
-            <mat-header-cell *matHeaderCellDef>فعالیت</mat-header-cell>
-            <mat-cell *matCellDef="let row;">{{row.activity}}</mat-cell>
-        </ng-container>
+
+        <ng-container *ngFor="let dynamicColumn of 
+        ['hour1', 'hour2','hour3','hour4','hour5','hour6','hour7','hour8'
+        ,'hour9','hour10','hour11','hour12','hour13','hour14','hour15','hour16'
+        ,'hour17','hour18','hour19','hour20','hour21','hour22','hour23','hour24']; 
+        let i = index" [matColumnDef]="dynamicColumn">
+          <mat-header-cell *matHeaderCellDef  >{{i+1}}</mat-header-cell>
+          <mat-cell *matCellDef="let row;  let indexOfElement = index" 
+
+          (contextmenu)="onRightClick($event, {content: indexOfElement })"
+         
+          (mouseover)="onCellClick( indexOfElement, i+1 )" 
+          (mousedown)="onCellClickSingleClick( indexOfElement, i+1, $event )" 
+          ondragstart="return false;" ondrop="return false;"
+                   
+          [ngClass]="
+          (  IsCellClickForEachBarname[indexOfElement]['accepted'][i+1])? 'accepted'
+          :( IsCellClickForEachBarname[indexOfElement]['waiting'][i+1])? 'prim_reg'
+          :(IsCellClick[indexOfElement][i+1])? 'selected_Cell_ForReg'
+          :(  RowsData[indexOfElement+1][i+1] < requestVolume )? 'unavailable_Cell_ForReg'
+          :( RowsDataForColor[indexOfElement+1][i+1] >= requestVolume )? 'available_Cell_ForReg'
+          : (dynamicColumn == 'hour')? 'table_head': 'in_query_'+math.round(math.max(math.min((requestVolume-RowsDataForColor[indexOfElement+1][i+1])/10,10),0))" 
+          style="font:14px BZar;"
+  
+          >
+          {{row.hour[i]}}</mat-cell>
+      </ng-container>
+      
+      
+      <ng-container matColumnDef="advancedTool">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox [aria-label]="" 
+                 name="checkedAll"
+                 value=""
+                 (click)="selectAll()"
+                 [(ngModel)]="selectAllDays"
+                 class="delete_btn_all myTableCell2"
+                 title="انتخاب همه"
+                 
+                >
+               
+             </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell class="myTableCell"  *matCellDef="let row;  let indexOfElement = index">
+          <mat-checkbox  class="myTableCell2"[aria-label]="" 
+           
+               value="{{selectedDaysForDeletion[indexOfElement].value}}"
+               [(ngModel)]="selectedDaysForDeletion[indexOfElement].checked">
+             </mat-checkbox>
+        </mat-cell>
+    </ng-container>
  
-        <mat-header-row *matHeaderRowDef="columns">
+      <ng-container matColumnDef="advancedTool2">
+        <mat-header-cell *matHeaderCellDef>
+          <button 
+          style="background-color: transparent; border: transparent;"
+          (click)="deleteAll(resourceId, year, month,  barnameId)">
+            <mat-icon color = "warn" class="delete_btn delete_btn_all" title="حذف روزهای انتخاب شده">
+              delete
+            </mat-icon>
+          
+          </button>
+        </mat-header-cell>
+        <mat-cell class="myTableCell"  *matCellDef="let row;  let indexOfElement = index">
+          <button 
+          style="background-color: transparent; border: transparent;"
+          (click)="deleteRequestConform(resourceId, year, month, indexOfElement+1, barnameId)">
+          <mat-icon color = "warn" class="delete_btn" title="حذف این ردیف">
+            delete
+          </mat-icon>
+        </button>
+        </mat-cell>
+    </ng-container>
+ 
+      <ng-container matColumnDef="advancedTool3">
+        <mat-header-cell *matHeaderCellDef>
+          <button 
+          style="background-color: transparent; border: transparent;"
+          >
+          <mat-icon color = "primary"
+          class="delete_btn_all" >
+          file_copy
+            </mat-icon>
+          
+          </button>
+        </mat-header-cell>
+        <mat-cell class="myTableCell"  *matCellDef="let row;  let indexOfElement = index">
+          <button 
+          style="background-color: transparent; border: transparent;"
+          (click)="copyRowPattern( indexOfElement+1)"
+          title="کپی الگوی این روز">
+
+              <mat-icon color = "primary" class="delete_btn">
+                file_copy
+              </mat-icon>
+          
+        </button>
+        </mat-cell>
+    </ng-container>
+ 
+      <ng-container matColumnDef="advancedTool4">
+        <mat-header-cell *matHeaderCellDef>
+          <button 
+             style="background-color: transparent; border: transparent;"
+             (click)="pasteAll()">
+             <mat-icon color = "primary"
+             class="delete_btn_all" >
+               format_paint
+               </mat-icon>
+             
+             </button>
+        </mat-header-cell>
+        <mat-cell class="myTableCell"  *matCellDef="let row;  let indexOfElement = index">
+          <mat-checkbox [aria-label]="" 
+          class="myTableCell2"
+          value="{{selectedDaysForPaste[indexOfElement].value}}"
+          [(ngModel)]="selectedDaysForPaste[indexOfElement].checked"
+          title="انتخاب این روز برای تکرار فرمت انتخاب شده در آن">
+      </mat-checkbox>
+        </mat-cell>
+    </ng-container>
+ 
+        <mat-header-row *matHeaderRowDef="columnsTest">
         </mat-header-row>
-        <mat-row *matRowDef="let row; columns: columns"></mat-row>
+        <mat-row *matRowDef="let row; columns: columnsTest"></mat-row>
+
+        
     </mat-table>
 
+   </div>
 </div>
 <br>
 <ag-grid-angular

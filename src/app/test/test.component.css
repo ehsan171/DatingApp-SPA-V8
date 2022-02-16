@@ -138,6 +138,7 @@
     }
     .delete_btn_all{
         color: rgb(240, 235, 235);
+        size: 5px;
     }
 
     .more_btn{
@@ -368,3 +369,151 @@
     td{
       border-radius: 50px;
     }
+
+    .disable-text-selection {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+  }
+
+  .mat-row:hover {
+    background-color: #F0FFF0;
+  }
+
+  mat-header-cell {
+    background-color: #047aa0;
+    color: rgb(252, 252, 252);
+    /* row padding */
+    /* padding: 16px 0; */
+    /* row border */
+    /* border: 1px solid #b0d9db; */
+    border-bottom: 1px solid #ffa600;
+    border-top: 1px solid #ffa600;
+   }
+   mat-header-cell, mat-cell {
+    justify-content: center;
+  }
+  mat-cell {
+    /* row padding */
+    /* padding: 16px 0; */
+    /* row border */
+    /* border: 1px solid #b0d9db; */
+    border-bottom: 1px solid #ffa600;
+    border-top: 1px solid #ffa600; 
+   }
+   
+   td.mat-cell:first-child {
+     /* row border */
+     border-left: 1px solid #ffa600;
+   }
+   
+   td.mat-cell:last-child {
+     /* row border */
+     border-right: 1px solid #ffa600;
+   }
+   
+   table {
+     /* row spacing / margin */
+     border-spacing: 0 8px !important;
+   } 
+   /* .myTableCell{
+     background-color: red;
+     /* width: 10px !important; */
+     /* text-align: center; */
+   /* } */
+   
+   .mat-column-day {
+    word-wrap: unset !important;
+    white-space: nowrap !important;
+    flex: 0 0 100px !important;
+    /* min-width:  10px !important; */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    font-size: 11px;
+    font-family:Iranian Sans,Sahel,Lotus,tahoma !important;;
+  }
+   .mat-column-activity {
+    padding: 0 5px 0 5px;
+    word-wrap: unset !important;
+    white-space: nowrap !important;
+    /* flex: 0 0 100px !important; */
+    min-width:  10px !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    font-size: 11px;
+    font-family:Iranian Sans,Sahel,Lotus,tahoma !important;
+  }
+   .mat-column-advancedTool {
+    padding: 0 5px 0 5px;
+    word-wrap: unset !important;
+    white-space: nowrap !important;
+    /* flex: 0 0 100px !important; */
+    min-width:  10px !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+   
+
+  }
+   .mat-column-advancedTool4 {
+    padding: 0 5px 0 5px;
+    word-wrap: unset !important;
+    white-space: nowrap !important;
+    /* flex: 0 0 100px !important; */
+    min-width:  10px !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+   
+
+  }
+  .myTableCell2{
+    width: 10px !important;
+    text-align: center;
+  } 
+
+  .mat-header-cell {
+   font-family: BZar;
+   font-size: 16px;
+}
+  .activityClass{
+    background-color: transparent;
+    border: none;
+  }
+
+  .mat-header-row{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+    }
+

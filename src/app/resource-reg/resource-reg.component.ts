@@ -135,7 +135,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
               if(day.dayName==(+element+1).toString()){day.checked=true}
             })
           })
- console.log("20061",objIndex)
+
 
         }
         gettingDataProducer(){
@@ -596,12 +596,12 @@ import { MatMenuTrigger } from '@angular/material/menu';
         
   this.year=1400;this.month=4;
             let myDate =(year.toString()+formattedMonth.toString()+formattedNumber.toString())
-            console.log("2003",myDate)
-            console.log("2004",moment(myDate,"jYYYYjMMjDD",'fa').format('ddd, ll'))
-            console.log('2005',moment(myDate,"jYYYYjMMjDD",'fa').format('d'))
+            // console.log("2003",myDate)
+            // console.log("2004",moment(myDate,"jYYYYjMMjDD",'fa').format('ddd, ll'))
+            // console.log('2005',moment(myDate,"jYYYYjMMjDD",'fa').format('d'))
 
    
-            console.log("2003",this.year,this.month, index)
+            // console.log("2003",this.year,this.month, index)
             let dayPaste =   
             {name:index, value:index, checked:false, dayName:moment(myDate,"jYYYYjMMjDD",'fa').format('d')}
    
