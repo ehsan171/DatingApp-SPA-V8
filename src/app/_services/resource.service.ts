@@ -54,6 +54,16 @@ export class ResourceService {
      return this.http.get<Allocation[]>(this.baseUrl  + 'allocation/GetAllWaitingRequestByResourceYearMonthForAccepting/'+resourceId + '/' + year + '/' + month, httpOptions);
    }
   
+  getWaitingRequestAllocationsTest(resourceId: string, year: number, month:  number): Observable<Allocation[]> {
+   console.log(this.baseUrl  + 'allocation/test/'+resourceId + '/' + year + '/' + month, httpOptions)
+     return this.http.get<Allocation[]>(this.baseUrl  + 'allocation/test/'+resourceId + '/' + year + '/' + month, httpOptions);
+   }
+  
+  getAllRejectedRequest(resourceId: string, year: number, month:  number): Observable<Allocation[]> {
+   console.log(this.baseUrl  + 'allocation/GetAllRejectedRequestByResourceYearMonth/'+resourceId + '/' + year + '/' + month, httpOptions)
+     return this.http.get<Allocation[]>(this.baseUrl  + 'allocation/GetAllRejectedRequestByResourceYearMonth/'+resourceId + '/' + year + '/' + month, httpOptions);
+   }
+  
    acceptRequest(resourceId: string, year: number, month:  number, day:  number,  barnameId: string): Observable<Allocation[]> {
    console.log(this.baseUrl  + 'allocation/acceptRequest/'+resourceId + '/' + year + '/' + month+ '/' + day+ '/' + barnameId, httpOptions)
      return this.http.get<Allocation[]>(this.baseUrl  + 'allocation/acceptRequest/'+resourceId + '/' + year + '/'  + month+ '/' + day+ '/' + barnameId, httpOptions);

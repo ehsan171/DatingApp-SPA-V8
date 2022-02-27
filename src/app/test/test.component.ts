@@ -1167,12 +1167,11 @@ cancelRegisterMode(event: string){
     { def: 'advancedTool4', label: 'advancedTool4', hide: this.hour1.value},
   ]
   columnDefinitionsFormTest = [
-    // { def: 'day',    label:'روز',  hide: this.day.value},
-    { def: 'activity', label: 'فعالیت',icon:'activity.png', hide: this.activity.value},
-    { def: 'hour1',   label:'صبح',icon:'sunset.png',hide: this.hour1.value},
-    { def: 'hour2',  label:'عصر',icon:'morning.png',hide: this.hour1.value},
-    { def: 'hour3',  label:'شب',icon:'night.png',  hide: this.hour1.value},
-    { def: 'advancedTool',  label:'ابزار پیشرفته',icon:'tools.png',  hide: this.hour1.value},
+    { def: 'activity',    label: 'فعالیت',        title: ' فعالیت ها',    icon:'activity.png', hide: this.activity.value, },
+    { def: 'hour1',       label:'صبح',            title: 'ساعات 8-1',     icon:'sunset.png',    hide: this.hour1.value},
+    { def: 'hour2',       label:'عصر',            title: 'ساعات 16-9',    icon:'morning.png',   hide: this.hour1.value},
+    { def: 'hour3',       label:'شب',             title: 'ساعات 24-17',   icon:'night.png',     hide: this.hour1.value},
+    { def: 'advancedTool',label:'ابزار پیشرفته', title: 'ابزار پیشرفته',icon:'tools.png',     hide: this.hour1.value},
     
   ]
 
@@ -1246,9 +1245,6 @@ cancelRegisterMode(event: string){
     this.columnDefinitionsTest[27].hide = this.advancedTool.value;  
     this.columnDefinitionsTest[28].hide = this.advancedTool.value;  
     this.columnDefinitionsTest[29].hide = this.advancedTool.value;  
-   
-       console.log('20001',this.columnDefinitionsTest);
-       console.log('200012',this.dataSource2);
   
        this.getDisplayedColumnsTest();
      });
@@ -1258,10 +1254,6 @@ cancelRegisterMode(event: string){
   }
   
 
-  
-  
-  
-  
   columnDefs = [
     { headerName: 'make', field: 'make' },
     { headerName: 'model', field: 'model' },

@@ -3,12 +3,13 @@
 <div
 (mousedown)="mouseClickDown($event)"
 (mouseup)="mouseClickUp($event)">
-    <form [formGroup]="resourceForm" >
+    
+
+<form [formGroup]="resourceForm" >
 
       <div class="row">
         <div class="col">
           <div class="form-group">
-          
             <ejs-dropdownlist 
             [(ngModel)]="selectedOption"
             enableRtl='true' 
@@ -22,51 +23,10 @@
             [allowFiltering]='true' 
             (filtering)='onFilteringResource($event)'
             (change)="onChangeResource($event.value)">a
-          </ejs-dropdownlist>
-        
-          </div>
-        </div>
-<!-- 
-        <div class="col">
-          <div class="form-group">
-          
-            <ejs-dropdownlist 
-            [(ngModel)]="selectedCapacity"
-            enableRtl='true' 
-            floatLabelType="Auto" 
-            id='requestResId' 
-            #samples 
-            [dataSource]='data' 
-            [fields]='capacityFields' 
-            formControlName="capacity"
-            [placeholder]='textCapacity' 
-            (change)="onChangeRequestRes($event.value)"
-            >
             </ejs-dropdownlist>
-        
-          </div>
-        </div> -->
-
-        <!-- <div class="col" style="width: 50px;">
-          <div class="form-group" >
-            
-            <div class="" >
-              <span class="" style="color: rgb(160, 159, 159);"></span>
-                  <div style="height: 30px;border-bottom:  1px solid rgb(160, 159, 159);  margin-top: 20px; text-align: right ;" >
-                
-                  {{resourceUnit}}
-                  
-                  </div>
-            
-          </div>
-    
-    
           </div>
         </div>
-    
-      -->
-       
-      
+
       <div class="col">
           <div class="form-group">
           
@@ -111,10 +71,7 @@
       </div>
 
     </form>
-    <!-- <button (click)="onSave()">test2</button>
-    <button (click)="register()">register</button> -->
   
-   
     <div class="bxday">
 
 
@@ -130,18 +87,9 @@
 
     
     <div *ngFor="let column of numberDayOfMonth[month]; let numberDayOfMonthIndex = index">
-      <!-- <ng-container *ngIf="ArrayRowsExtraDataset[i][0]">
-      <div style="width: 100%; text-align: right; padding-bottom:5px ;margin-bottom: 10px;">
-       
-      </div>
-      </ng-container>
-      
-     -->
-  {{numberDayOfMonthIndex}}
       
   
   <div  [@openClose]="div[numberDayOfMonthIndex] ? 'open' : 'closed'">
-    {{ numberDayOfMonth[month]}}   
         <!-- {{ArrayRowsExtraDataset[i][0].day}}{{monthName[month-1]}} -->
               <mat-tab-group>
         <mat-tab label="First"> 
@@ -153,7 +101,7 @@
                   <!-- <th scope="col" *ngFor="let column of header2" >  
                     {{column}}  
                   </th>  -->
-                  <th>نام برنامه</th>
+                  <th>نام برنامه1</th>
                   <th colspan="2">شبکه</th>
                
                   <th>تهیه کننده</th>
@@ -165,7 +113,7 @@
                 </tr>  
               </thead>  
               <tbody style="  border: 1px solid black;">  
-                <tr class="tdrow" *ngFor="let row of ArrayRowsExtraDataset[numberDayOfMonthIndex]| slice:1;let indexOfElement=index;" style="  border: 1px solid black;">  
+                <tr class="tdrow" *ngFor="let row of sqlGetArray[numberDayOfMonthIndex]" style="  border: 1px solid black;">  
                  
                   <td  
                     
@@ -174,11 +122,11 @@
                   style="  border: 1px solid black;"
                   
                     >  
-                  {{row["hour"]}}
+                  {{row["title"]}}
                 
                   </td>  
                     
-                  <td ><img src='../../assets/library/images/{{row["networkId"]}}.png' alt="network icon" width="40" height="40"></td>
+                  <td ><img src='../../assets/library/images/{{row.networkIdArray}}.png' alt="network icon" width="40" height="40"></td>
         
                   
                   <td  
@@ -188,7 +136,7 @@
                   style=""
                   
                     >  
-                  {{row["networkName"]}}
+                  {{row.networkArray.join(', ')}}
                 
                   </td>  
                     <td  
@@ -198,7 +146,7 @@
                   
                   style="  border: 1px solid black; padding: 0;direction: rtl;"
                     >  
-                  <span style="margin:0;">{{row["producer"]}}</span>
+                  <span style="margin:0;">{{row.producersArray.join(', ')}}</span>
                 
                   </td>  
                     <td  
@@ -208,7 +156,7 @@
                   
                   style="  border: 1px solid black; padding: 0;direction: rtl;"
                     >  
-                  <span style="margin:0;">{{row["RegDate"]}}</span>
+                  <span style="margin:0;">{{ momentHtml.from(row.lastRegisterDate, 'en', 'YYYY-MM-DD').format('YYYY/MM/DD')}}</span>
                 
                   </td>  
                     <td  
@@ -218,7 +166,7 @@
                   
                   style="  border: 1px solid black; padding: 0;direction: rtl;"
                     >  
-                  <span style="margin:0;">{{row["duration"]}}</span>
+                  <span style="margin:0;">{{momentHtml.from(row.lastRegisterDate, 'en', 'YYYY-MM-DD').toNow(true)}}</span>
                 
                   </td>  
                     <td  
@@ -229,7 +177,7 @@
                   style="  border: 1px solid black; padding: 0;direction: rtl;"
                     >  
                   <span style="margin:0;">{{(row["totalConflict"]/row["totalDay"])*100| number:'1.0-1'}}%</span>
-                
+                {{capacity}}
                   </td>  
         
                   <td>
@@ -261,30 +209,34 @@
                   <thead style="background-color: #c1dee4;">  
                     <tr>  
                       <th scope="col" *ngFor="let column of header">  
-                        {{column === 'activity' ? 'فعالیت' : (column === 'hour' ? 'ساعت' :column) }}  
+                        {{column === 'activity' ? 'فعالیت' : (column === 'hour' ? 'نام برنامه' :column) }}  
                       </th>  
                     </tr>  
                   </thead>  
                   <tbody style="border: #0000;">  
-                    <tr *ngFor="let row of ArrayRowsDataset[numberDayOfMonthIndex]| slice:1;let indexOfElement=index;">  
+                    <tr *ngFor="let row of sqlGetArray[numberDayOfMonthIndex];let indexOfElement=index;">  
+                      <td>    {{row["title"]}}</td>
+                      <ng-container *ngFor="let item of header; let i=index">
+                        
+                       
                         <td  
                         class="details"
                         
                         (mouseover)="onCellClick( indexOfElement, column )" 
                         (mousedown)="onCellClickSingleClick( indexOfElement, column,$event )" 
                         ondragstart="return false;" ondrop="return false;"
-                        *ngFor="let column of header"
-                      
-   
+                        *ngIf="i != 0 "
                         [ngClass]="
-                        (column != 'hour' && row[column])? 'colData'
-                        
-                        : (column == 'hour')? 'colTitle': ''" 
+                        (column != 'hour' && row[column])? 'colData'     : (column == 'hour')? 'colTitle': ''" 
                          >  
-                      {{row[column]}}
-                      
+                       
+                    {{i}}
                     
                       </td>  
+                 
+                    </ng-container>
+                 
+                     
                     </tr>  
                     <tr>
                       <td  *ngFor="let column of header"
@@ -296,8 +248,9 @@
                     
                     </tr>
                     <tr>
-                      <td  *ngFor="let column of header">
-                          {{remainResourceOfColumn[numberDayOfMonthIndex][column]}}
+                      <td>ظرفیت آزاد</td>
+                      <td  *ngFor="let column of header";let i =index>
+                          {{capacity}}{{sqlGetUsedResourceArray[0]}}
                       </td>
                     
                     </tr>
@@ -478,7 +431,7 @@
           
                     <tr>
                       <td  *ngFor="let column of header">
-                        {{shortageResourceOfColumn[numberDayOfMonthIndex][column]}}
+                 
                       </td>
                     
                     </tr>

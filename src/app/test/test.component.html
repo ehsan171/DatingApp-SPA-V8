@@ -211,52 +211,76 @@
  
 <div>
 
-    <form [formGroup]="formTest">
-        <mat-checkbox 
-        *ngFor="let cd of columnDefinitionsFormTest"  
-        style="width: 150px;"
-        [formControlName]="cd.def">
-        <img src='../../assets/library/images/icon/{{cd.icon}}' alt="icon" width="20" height="20">
-        <!-- {{cd.label}}  -->
 
-        
-        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon> -->
-      </mat-checkbox>
-    </form>
     <div style="">
-      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+       <mat-paginator [pageSizeOptions]="[10, 15, 20]"
+       dir='rtl'
             showFirstLastButtons 
-            aria-label="Select page of periodic elements">
-      </mat-paginator> -->
+            aria-label="انتخاب تعداد روزهای ">
+      </mat-paginator> 
 
-      <div  class="flex-container1" >
-        <div class="div1 fl"></div>
+      <div  class="flex-container1"  >
+        <div class="div1 fl">
+          <form [formGroup]="formTest">
+            <mat-checkbox 
+            *ngFor="let cd of columnDefinitionsFormTest"  
+            style="width: 100px; "
+            [formControlName]="cd.def">
+            <img src='../../assets/library/images/icon/{{cd.icon}}' alt="icon" title="{{cd.title}}" width="20" height="20">
+            <!-- {{cd.label}}  -->
+    
+            
+            <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon> -->
+          </mat-checkbox>
+     
+        </form>
+        </div>
               <div class="div2 fl">
-                  <ejs-multiselect enableRtl='true' #checkboxForDaySelection floatLabelType="Auto" id='dayId' #samples [dataSource]='dataDay' [fields]='fieldsDay' formControlName="day" [placeholder]='textDay' [allowFiltering]='true' >a</ejs-multiselect>
+                <ejs-multiselect 
+                enableRtl='true' 
+                #checkboxForDaySelection 
+                floatLabelType="Auto" 
+                id='dayId' 
+                #samples 
+                [dataSource]='dataDay' 
+                [fields]='fieldsDay' 
+                formControlName="day" 
+                [placeholder]='textDay' 
+                [allowFiltering]='true' >a
+          </ejs-multiselect>
             
               </div>
               <div class="div3 fl" style="vertical-align: middle;">
                     <button
-                    style="   margin-top: 45%; "
-                    class="btn btn-primary"
-                    (click)="daySelectFunc()">انتخاب روز</button>
+                        style="   margin-top: 35%; background-color: transparent; border: none;"
+                        class="btn btn-primary"
+                        (click)="daySelectFunc()">
+                        <mat-icon 
+                        style=""
+                            class="delete_btn text-primary" 
+                            title="حذف این ردیف">
+                            check_circle
+                        </mat-icon>
+                  </button>
             </div>
         
         
         </div>
+
         <div class="flex-container ">
           <div>
-                  <table style="text-align: center;">
+                  <table 
+                      style="text-align: center; width: 100%; margin-bottom: 4px;">
        
                   <tbody>
        
                     <tr>
                       
-                      <th class="accepted legend_tr col-2" >تخصیص داده شده</th>
-                      <th class="prim_reg legend_tr col-2" >قبلاٌ انتخاب کرده‌اید</th>
-                      <th class="unavailable_Cell_ForReg  col-2 legend_tr">نداشتن ظرفیت</th>
-                      <th class="selected_Cell_ForReg   col-2 legend_tr">انتخاب</th>
-                      <th class="in_query_legend legend_tr  col-2 ">صف تقاضا</th>
+                      <th class="accepted legend_tr col-2" style="width: 20%;" >تخصیص داده شده</th>
+                      <th class="prim_reg legend_tr col-2"  style="width: 20%;">قبلاٌ انتخاب کرده‌اید</th>
+                      <th class="unavailable_Cell_ForReg  col-2 legend_tr" style="width: 20%;">نداشتن ظرفیت</th>
+                      <th class="selected_Cell_ForReg   col-2 legend_tr" style="width: 20%;">انتخاب</th>
+                      <th class="in_query_legend legend_tr  col-2 " style="width: 20%;">صف تقاضا</th>
                 
                     </tr>
        
@@ -416,10 +440,3 @@
 
    </div>
 </div>
-<br>
-<ag-grid-angular
-style="width: 500px; height: 500px;"
-class="ag-theme-alpine"
-[rowData]="rowData"
-[columnDefs]="columnDefs">
-</ag-grid-angular>

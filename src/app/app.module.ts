@@ -22,9 +22,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {  ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CheckBoxModule, ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { NavComponent } from './nav/nav.component';
-import { MatTableModule } from '@angular/material/table';
-import { AutoCompleteModule, DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
-import { MatPaginatorModule } from '@angular/material/paginator';
+// import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { AutoCompleteModule,  DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+// import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -45,6 +45,12 @@ import { TestComponent } from './test/test.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { Test2Component } from './test2/test2.component';
+import { MatTableModule } from '@angular/material/table';
+// import { MatTableDataSource } from '@angular/material/table';
+import { MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -67,6 +73,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     ConfirmDialogComponent,
     LogOutComponent,
     TestComponent,
+    Test2Component,
     
     
   ],
@@ -98,7 +105,12 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     NgxSpinnerModule,
     AgGridModule.withComponents([]),
     FontAwesomeModule,
-    AngularSvgIconModule.forRoot()
+    AngularSvgIconModule.forRoot(),
+    // MatTableDataSource,
+    FormsModule ,
+    MultiSelectModule ,
+    MatTableModule 
+  
 
   ],
   providers: [

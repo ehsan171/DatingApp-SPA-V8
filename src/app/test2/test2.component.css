@@ -1,0 +1,163 @@
+.th-left{
+    text-align: left;
+
+    /* color: blueviolet; */
+  }
+.th-right{
+    text-align: right;
+
+    /* color:firebrick; */
+  }
+.colTitle{
+  font-weight: bold;
+  color:#0c7497;
+  padding: 5px 5px !important;
+min-width: 100px;
+}
+.colData{
+ font-weight: bold;
+  color:#0c7497;
+}
+.colGeneral{
+ font-weight: bold;
+  color:red;
+}
+.table_class {
+  border-collapse: collapse;
+  /* width: 200%; */
+  border: 1px solid #ddd;
+}
+
+.acc_rej_btn {
+  width: auto;
+  padding: 3px 10px;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+body {
+  /* height: 100vh;
+  width: 100vw; */
+  /* overflow: auto; */
+  overflow-x: scroll;
+}
+.test{
+  /* height: 20vh; */
+  /* width: 100vw; */
+  /* overflow: auto; */
+  /* max-height: 70vh; */
+  overflow-x: scroll;
+
+}
+.ng-tns-c54-0{
+  padding: 5px;
+  margin:10px auto;
+}
+.ng-star-inserted{
+  /* margin:140px auto 20px auto !important; */
+}
+.details {
+  position: relative;
+}
+
+.details span {
+  position: absolute;
+  top: 0;
+  transform: translateY(70%);  
+  display: none;
+  background: white;
+  z-index: 20;
+  min-width: 100%;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.details:hover span {
+  display: inline;
+}
+
+td {
+  /* padding: 1rem; */
+  /* background: whitesmoke; */
+  border: 1px solid #0c7497;
+  text-align: center;
+  vertical-align: middle;
+}
+.tdrow td{
+  border:1px solid #077296 !important;
+}
+th{
+  /* padding: 1rem; */
+  border: 1px solid #077296;
+  text-align: center;
+  vertical-align: middle;
+}
+.ng-tns-c54-0{
+  text-align: center;
+  /* margin: auto; */
+}
+.ng-star-inserted{
+margin: 3px;
+/* border-radius: 5px; */
+
+}
+.activebtn{
+  background-color: blue !important;
+  color: #fff !important;
+}
+.bxday{
+  background-color: #7fbcce;
+  text-align: center;
+}
+.tbltop{
+  margin: 10px auto;
+  overflow: hidden;
+  padding: 0;
+}
+.tblbottom{
+  background: #ededed;
+  padding: 15px;
+    border-radius: 10px;
+}
+.btnaccept{
+
+}
+.btnrej{
+
+}
+.day_btn{
+  padding: 5px;
+  border:0px solid;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 2px;
+  /* padding: 10px;  */
+  /* margin-bottom: 10px; */
+  /* border-radius: 5px;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 4px 4px 2px grey; */
+  cursor: pointer;
+  /* width: 120px;
+  height: 40px;
+  margin-bottom: 10px; */
+}
+
+.drop-down-main{
+  display: none;
+}
+
+.divContainer{
+  /* display: none; */
+}
+
+ .table_info td:nth-child(2) {
+  border-left-style: none;
+
+ }

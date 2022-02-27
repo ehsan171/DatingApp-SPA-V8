@@ -94,10 +94,13 @@ import {
     header2: any = [];
     RowsData: any = [];
     ArrayRowsDataset: any = [];
+    RejectedArrayRowsDataset: any = [];
     RowsDataForWhichDay: any = [];
     ArrayRowsDatasetForWhichDay: any = [];
+    RejectedArrayRowsDatasetForWhichDay: any = [];
     RowsExtraDataset: any = [];
     ArrayRowsExtraDataset: any = [];
+    RejectedArrayRowsExtraDataset: any = [];
     IsCellClick: any = [ ]  
     test: any = {};
     test2: any = {};
@@ -107,6 +110,7 @@ import {
     totalHour: number = 24;
     year: number = 1400;
     month: number = 4 ;
+    counter: number = 0;
   
     //month: number  = +moment().locale('fa').format('mm');;
     
@@ -127,6 +131,7 @@ import {
     public capacityFields: any = [];
     public yearFields: any = [];
     public monthFields: any = [];
+    public numberDayOfMonth: any = [];
     public resourceFields: any = [];
     public dataResource: { [key: string]: Object }[] = [];
     public fieldResource: object = { text: 'name', value: 'id' };
@@ -143,12 +148,19 @@ import {
     public textCapacity = 'ظرفیت مورد نیاز';
     public textYear = 'سال';
     public textMonth = 'ماه';
+     
     div:  boolean[] = [];
 
    
 
     divFunction(i: string | number) {
-       this.div[i] = !this.div[i];
+      let s = this.div[i]
+
+      this.div.forEach((value, index) => {
+
+        this.div[index] = false;
+    });
+      this.div[i] = !s;
 
     }
     resourceForm = new FormGroup({
@@ -158,18 +170,18 @@ import {
       resourceId: new FormControl('20')
   }); 
 
-  mouseClickDown(event: { which: number; }){
-  if(event.which == 1){
-  this.clickDown = true;
+    mouseClickDown(event: { which: number; }){
+    if(event.which == 1){
+    this.clickDown = true;
 
-  }
-  }
-  mouseClickUp(event: { which: number; }){
-  if(event.which == 1){
-  this.clickDown = false;
+    }
+    }
+    mouseClickUp(event: { which: number; }){
+    if(event.which == 1){
+    this.clickDown = false;
 
-  }
-  }
+    }
+    }
 
     gettingDataCapacity(resourceId: string) {
 
@@ -193,6 +205,7 @@ import {
       );
 
     }
+
     gettingDataYearMonth() {
       var currentTime = new Date()
       var year = +moment().locale('fa').format('YYYY');
@@ -221,8 +234,6 @@ import {
       
     }
 
-
-
     gettingWaitingForAcceptAllocation(resourceId: string, year: number, month: number) {
 
 
@@ -238,176 +249,175 @@ import {
           this.header2=["نام برنامه","شبکه","تهیه کننده", "تاریخ ثبت","زمان سپری شده","درصد تداخل"]
  
           this.ArrayRowsDataset = []
-            this.ArrayRowsDatasetForWhichDay = []
-            this.ArrayRowsExtraDataset = []
+          this.ArrayRowsDatasetForWhichDay = []
+          this.ArrayRowsExtraDataset = []
+          
           
           for (let i = 1; i <= 24;i++){
             this.header.push(i)
        
           }
+
+          
+
           this.resourceService.getWaitingRequestAllocations(resourceId,year,month).subscribe((allocation: Allocation[]) => {
               
             this.allocation = allocation['allocations'];
             this.resourceInfo = allocation['test'];
+            console.log("80002", this.allocation)
             
+            
+            for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
 
-      
-
-
-
-for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
-
-          this.RowsData = [ ]
-          this.RowsDataForWhichDay = [ ]
-          this.RowsExtraDataset = [ ]
-
-      
-          for (let index = -1; index <this.allocation[numOfDay].length; index++) { 
-           
-              moment.locale('fa');
-              
-            let index2 =(index == -1 ? 0 : index);
-            this.test =   
-                      {  
-                        "hour" :this.allocation[numOfDay][index2][0]['title']
-                      }
-            let test4 =   
-                      {  
-                        "hour" :(this.allocation[numOfDay][index2][0]['title']>0)?1:0
-                      }
-            let test3 =   
-                      {  
-                        "hour" :this.allocation[numOfDay][index2][0]['title'],
-                        "day": this.allocation[numOfDay][index2][0]['day'],
-                        "year": this.allocation[numOfDay][index2][0]['year'],
-                        "month": this.allocation[numOfDay][index2][0]['month'],
-                        "monthName": this.monthName[this.allocation[numOfDay][index2][0]['month']-1],
-                        "producer" :this.allocation[numOfDay][index2][0]['producers'],
-                        "barnameId" :this.allocation[numOfDay][index2][0]['id'],
-                        "networkName" :this.allocation[numOfDay][index2][0]['network'],
-                        "networkId" :this.allocation[numOfDay][index2][0]['networkId'],
-                        // "RegDate" : this.allocation[3][index2][0]['registerDate']
-                        "duration" :  moment.from(this.allocation[numOfDay][index2][0]['registerDate'], 'en', 'YYYY-MM-DD').toNow(true),
-                        "RegDate" :  moment.from(this.allocation[numOfDay][index2][0]['registerDate'], 'en', 'YYYY-MM-DD').format('YYYY/MM/DD'),
-                        "totalDay":0,
-                        "totalConflict":0
-                      }
-            this.test2 =   
-                      {  
-                        "hour" : index
-                      }
-                    this.RowsData.push(this.test);
-                    this.RowsDataForWhichDay.push(test4);
-                  
+                      this.RowsData = [ ]
+                      this.RowsDataForWhichDay = [ ]
+                      this.RowsExtraDataset = [ ]
 
                   
-                    this.RowsExtraDataset.push(test3);
-               
-                    this.IsCellClick.push(this.test2);
-                  
-                   
-            }
-           
-            this.test =   
-            {  
-              "hour" :""
-            }
-            let test2={
-              "hour" :""
-            }
-             let test3={
-               "hour" : ""
-             }
-            this.totalOfColumn.push(this.test);
-            this.remainResourceOfColumn.push(test2);
-            this.shortageResourceOfColumn.push(test3);
-
-            for (let i = 1; i <= 24;i++){
-        
-              this.totalOfColumn[numOfDay][i]= 0;
-              this.shortageResourceOfColumn[numOfDay][i]= 0;
-              this.remainResourceOfColumn[numOfDay][i]= this.resourceInfo[0]['resourceCapacity'];
-            }
-            this.remainResourceOfColumn[numOfDay]['hour'] = "منبع آزاد"
-            this.totalOfColumn[numOfDay]['hour'] = "مجموع"
-            this.shortageResourceOfColumn[numOfDay]['hour'] = "کمبود؟"
-           
-            for (let index = 1; index < this.RowsData.length; index++) { 
-              
-                    for(let j = 0 ; j < this.allocation[numOfDay][index-1].length; j++){
+                      for (let index = -1; index <this.allocation[numOfDay].length; index++) { 
                       
-                      (this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']]) =0 ;
-                     
-                    }
-                    
-                    for(let j = 0 ; j < (this.allocation[numOfDay][index-1].length); j++){
-                     
+                          moment.locale('fa');
                           
-           
-                      (this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']]) += (this.allocation[numOfDay][index-1][j]['usedUnit']) ;
-                      (this.RowsDataForWhichDay[index][this.allocation[numOfDay][index-1][j]['hour']]) = ((this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']])>0)?1:0 ;
-                      this.totalOfColumn[numOfDay][this.allocation[numOfDay][index-1][j]['hour']] += this.allocation[numOfDay][index-1][j]['usedUnit'];
-                 
-                      delete this.RowsDataForWhichDay[index].hour;
-                    }
-                  
-                   
-            }
+                        let index2 =(index == -1 ? 0 : index);
+                        this.test =   
+                                  {  
+                                    "hour" :this.allocation[numOfDay][index2][0]['title']
+                                  }
+                        let test4 =   
+                                  {  
+                                    "hour" :(this.allocation[numOfDay][index2][0]['title']>0)?1:0
+                                  }
+                        let test3 =   
+                                  {  
+                                    "hour" :this.allocation[numOfDay][index2][0]['title'],
+                                    "day": this.allocation[numOfDay][index2][0]['day'],
+                                    "year": this.allocation[numOfDay][index2][0]['year'],
+                                    "month": this.allocation[numOfDay][index2][0]['month'],
+                                    "monthName": this.monthName[this.allocation[numOfDay][index2][0]['month']-1],
+                                    "producer" :this.allocation[numOfDay][index2][0]['producers'],
+                                    "barnameId" :this.allocation[numOfDay][index2][0]['id'],
+                                    "networkName" :this.allocation[numOfDay][index2][0]['network'],
+                                    "networkId" :this.allocation[numOfDay][index2][0]['networkId'],
+                                    // "RegDate" : this.allocation[3][index2][0]['registerDate']
+                                    "duration" :  moment.from(this.allocation[numOfDay][index2][0]['registerDate'], 'en', 'YYYY-MM-DD').toNow(true),
+                                    "RegDate" :  moment.from(this.allocation[numOfDay][index2][0]['registerDate'], 'en', 'YYYY-MM-DD').format('YYYY/MM/DD'),
+                                    "totalDay":0,
+                                    "totalConflict":0
+                                  }
+                        this.test2 =   
+                                  {  
+                                    "hour" : index
+                                  }
+                                this.RowsData.push(this.test);
+                                this.RowsDataForWhichDay.push(test4);
+                              
 
-            this.ArrayRowsDataset.push(this.RowsData)
-            this.ArrayRowsDatasetForWhichDay.push(this.RowsDataForWhichDay)
-            this.ArrayRowsExtraDataset.push(this.RowsExtraDataset)
-
-            this.resourceService.getFreeResourcePerHour(resourceId,year,month,this.allocation[numOfDay][0][0].day).subscribe((allocation: Allocation[]) => {
-           
-              let allocation2 = allocation['allocations'];
-              this.resourceInfo = allocation['test'];
-          
-              for(let numOfHour=0; numOfHour<this.allocation.length;numOfHour++){
-                for (let index = 0; index <allocation2.length; index++) { 
-                
-                  this.remainResourceOfColumn[numOfDay][allocation2[index]['hour']] -= allocation2[index]['usedResource']
+                              
+                                this.RowsExtraDataset.push(test3);
+                          
+                                this.IsCellClick.push(this.test2);
+                              
+                              
+                        }
                       
-              }
+                        this.test =   
+                        {  
+                          "hour" :""
+                        }
+                        let test2={
+                          "hour" :""
+                        }
+                        let test3={
+                          "hour" : ""
+                        }
+                        this.totalOfColumn.push(this.test);
+                        this.remainResourceOfColumn.push(test2);
+                        this.shortageResourceOfColumn.push(test3);
 
-              for(let index = 0; index <24; index++){
-         
-                  let dif = this.remainResourceOfColumn[numOfDay][index]-this.totalOfColumn[numOfDay][index];
-                  this.shortageResourceOfColumn[numOfDay][index] =  (dif<0) ? 1 : 0;
-               
-          
-              }          
-            }
+                        for (let i = 1; i <= 24;i++){
+                    
+                          this.totalOfColumn[numOfDay][i]= 0;
+                          this.shortageResourceOfColumn[numOfDay][i]= 0;
+                          this.remainResourceOfColumn[numOfDay][i]= this.resourceInfo[0]['resourceCapacity'];
+                        }
+                        this.remainResourceOfColumn[numOfDay]['hour'] = "منبع آزاد"
+                        this.totalOfColumn[numOfDay]['hour'] = "مجموع"
+                        this.shortageResourceOfColumn[numOfDay]['hour'] = "کمبود؟"
+                      
+                        for (let index = 1; index < this.RowsData.length; index++) { 
+                          
+                                for(let j = 0 ; j < this.allocation[numOfDay][index-1].length; j++){
+                                  
+                                  (this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']]) =0 ;
+                                
+                                }
+                                
+                                for(let j = 0 ; j < (this.allocation[numOfDay][index-1].length); j++){
+                                
+                                      
+                      
+                                  (this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']]) += (this.allocation[numOfDay][index-1][j]['usedUnit']) ;
+                                  (this.RowsDataForWhichDay[index][this.allocation[numOfDay][index-1][j]['hour']]) = ((this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']])>0)?1:0 ;
+                                  this.totalOfColumn[numOfDay][this.allocation[numOfDay][index-1][j]['hour']] += this.allocation[numOfDay][index-1][j]['usedUnit'];
+                            
+                                  delete this.RowsDataForWhichDay[index].hour;
+                                }
+                              
+                              
+                        }
+
+                        this.ArrayRowsDataset.push(this.RowsData)
+                        this.ArrayRowsDatasetForWhichDay.push(this.RowsDataForWhichDay)
+                        this.ArrayRowsExtraDataset.push(this.RowsExtraDataset)
+                  
+
+                        this.resourceService.getFreeResourcePerHour(resourceId,year,month,this.allocation[numOfDay][0][0].day).subscribe((allocation: Allocation[]) => {
+                      
+                          let allocation2 = allocation['allocations'];
+                          this.resourceInfo = allocation['test'];
+                      
+                          for(let numOfHour=0; numOfHour<this.allocation.length;numOfHour++){
+                            for (let index = 0; index <allocation2.length; index++) { 
+                            
+                              this.remainResourceOfColumn[numOfDay][allocation2[index]['hour']] -= allocation2[index]['usedResource']
+                                  
+                          }
+
+                          for(let index = 0; index <24; index++){
+                    
+                              let dif = this.remainResourceOfColumn[numOfDay][index]-this.totalOfColumn[numOfDay][index];
+                              this.shortageResourceOfColumn[numOfDay][index] =  (dif<0) ? 1 : 0;
+                          
+                      
+                          }          
+                        }
 
     
    
-      for(let i=0; i<this.ArrayRowsDatasetForWhichDay[numOfDay].length;i++) {
-  for(let i2 in this.ArrayRowsDatasetForWhichDay[numOfDay][i]) {
-    
-     this.ArrayRowsExtraDataset[numOfDay][i].totalDay += 1
-                        if(this.shortageResourceOfColumn[numOfDay][i2]==1){
-                          this.ArrayRowsExtraDataset[numOfDay][i].totalConflict += 1
+                        for(let i=0; i<this.ArrayRowsDatasetForWhichDay[numOfDay].length;i++) {
+                        for(let i2 in this.ArrayRowsDatasetForWhichDay[numOfDay][i]) {
+                      
+                          this.ArrayRowsExtraDataset[numOfDay][i].totalDay += 1
+                                              if(this.shortageResourceOfColumn[numOfDay][i2]==1){
+                                                this.ArrayRowsExtraDataset[numOfDay][i].totalConflict += 1
+                                              }
+                          }
                         }
-        }
-      }
 
       
-       
+       console.log("70001",  this.ArrayRowsExtraDataset);
               //this.RowsData.shift()
 
             }, () => {
              alert('This is from orgField');
             }
             );
-}
+            }
     
-
-           
-              
             //this.RowsData.shift()
 
           }, () => {
-           alert('This is from orgField');
+            alert('This is from orgField');
           }
           );
 
@@ -419,6 +429,7 @@ for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
           this.resourceService.acceptRequest(resourceId,year,month, day, barnameId).subscribe((allocation: Allocation[]) => {
              
             this.gettingWaitingForAcceptAllocation(resourceId,year, month);
+            this.gettingRejectedAllocation(resourceId,year, month);
 
           }, () => {
            alert('This is from orgField');
@@ -433,6 +444,7 @@ for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
           this.resourceService.rejectRequest(resourceId,year,month, day, barnameId).subscribe((allocation: Allocation[]) => {
             
           this.gettingWaitingForAcceptAllocation(resourceId,year, month);
+          this.gettingRejectedAllocation(resourceId,year, month);
 
           }, () => {
            alert('This is from orgField');
@@ -520,38 +532,35 @@ for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
     onChangeRequestRes(requestResValue: number) {
       this.requestVolume = requestResValue;
       this.gettingWaitingForAcceptAllocation(this.resourceId,this.year, this.month);
+      this.gettingRejectedAllocation(this.resourceId,this.year, this.month);
 
 
-  }
+    }
 
     onChangeResource(deviceValue: string) {
-
-    
     
       this.resourceId = deviceValue;
       this.gettingWaitingForAcceptAllocation(this.resourceId,this.year, this.month);
+      this.gettingRejectedAllocation(this.resourceId,this.year, this.month);
 
       this.gettingDataCapacity( this.resourceId);
-  }
-    onChangeYear(value: number) {
+    }
+    
+  onChangeYear(value: number) {
     
       let todayJalali = moment().locale('fa').format('YYYY');
-
-    
       this.year = value;
-
       this.gettingWaitingForAcceptAllocation(this.resourceId,this.year, this.month);
-
+      this.gettingRejectedAllocation(this.resourceId,this.year, this.month);
 
   }
-    onChangeMonth(valueMonth: number) {
+    
+  
+  onChangeMonth(valueMonth: number) {
 
       this.month = valueMonth;
-    
-
       this.gettingWaitingForAcceptAllocation(this.resourceId,this.year, this.month);
-
-
+      this.gettingRejectedAllocation(this.resourceId,this.year, this.month);
   }
 
   gettingDataResource(){
@@ -660,10 +669,18 @@ for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
   this.resourceService.registerAllocation(this.allocationRegister).subscribe(() => {
 
   alert('ثبت نام با موفقیت انجام شد.');
+  
   this.gettingWaitingForAcceptAllocation(
     this.allocationRegister[0].resourceId,
     this.allocationRegister[0].year,
     this.allocationRegister[0].month);
+  
+    this.gettingRejectedAllocation(
+    this.allocationRegister[0].resourceId,
+    this.allocationRegister[0].year,
+    this.allocationRegister[0].month);
+
+    
   }, error => {
  alert(error.error);
   }
@@ -681,6 +698,206 @@ for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
     // pass the filter data source, filter query to updateData method.
     e.updateData(this.dataResource, queryResource);
   }
+
+  gettingRejectedAllocation(resourceId: string, year: number, month: number) {
+
+
+
+    this.colors = [  '#ee4035', ' #f37736', '#fdf498', '#7bc043',' #0392cf', 'rgb(136,212,194) ', '	#ff6e4a', '#c3e3f5 ', '#76b3e8',  '#ee4035', ' #f37736', '#fdf498', '#7bc043',' #0392cf', 'rgb(136,212,194) ', '	#ff6e4a', '#c3e3f5 ', '#76b3e8' ];
+    this.colors2 = [  '#2a4d69' , '#4b86b4' , '#adcbe3' , '#e7eff6' , '#63ace5','#e3c9c9' , '#f4e7e7' , '#eedbdb' , '#cecbcb' , '#cbdadb' ];
+    this.random  = Math.floor((Math.random() * 9) + 1);
+    this.color   = Math.floor((Math.random() * this.colors.length - 1) + 1);
+    
+    this.totalOfColumn = []  
+    this.IsCellClick = [ ]  
+    this.header=["hour"]
+    this.header2=["نام برنامه","شبکه","تهیه کننده", "تاریخ ثبت","زمان سپری شده","درصد تداخل"]
+
+    this.RejectedArrayRowsDataset = []
+    this.RejectedArrayRowsDatasetForWhichDay = []
+    this.RejectedArrayRowsExtraDataset = []
+    
+    for (let i = 1; i <= 24;i++){
+      this.header.push(i)
+ 
+    }
+
+    for(let m = 0; m < 12; m++){
+
+      if(m<6){
+        this.numberDayOfMonth[m]= Array.from({length: 31}, (_, i) => i + 1)
+      }
+      else if(m <11){
+        this.numberDayOfMonth[m]= Array.from({length: 30}, (_, i) => i + 1)
+      }
+      else{
+        this.numberDayOfMonth[m]= Array.from({length: 29}, (_, i) => i + 1)
+      }
+
+      
+
+    }
+    console.log("30001",this.numberDayOfMonth)
+
+    this.resourceService.getAllRejectedRequest(resourceId,year,month).subscribe((allocation: Allocation[]) => {
+        
+      this.allocation = allocation['allocations'];
+      this.resourceInfo = allocation['test'];
+      
+      for(let numOfDay=0; numOfDay<this.allocation.length;numOfDay++){
+
+    this.RowsData = [ ]
+    this.RowsDataForWhichDay = [ ]
+    this.RowsExtraDataset = [ ]
+
+
+    for (let index = -1; index <this.allocation[numOfDay].length; index++) { 
+     
+        moment.locale('fa');
+        
+      let index2 =(index == -1 ? 0 : index);
+      this.test =   
+                {  
+                  "hour" :this.allocation[numOfDay][index2][0]['title']
+                }
+      let test4 =   
+                {  
+                  "hour" :(this.allocation[numOfDay][index2][0]['title']>0)?1:0
+                }
+      let test3 =   
+                {  
+                  "hour" :this.allocation[numOfDay][index2][0]['title'],
+                  "day": this.allocation[numOfDay][index2][0]['day'],
+                  "year": this.allocation[numOfDay][index2][0]['year'],
+                  "month": this.allocation[numOfDay][index2][0]['month'],
+                  "monthName": this.monthName[this.allocation[numOfDay][index2][0]['month']-1],
+                  "producer" :this.allocation[numOfDay][index2][0]['producers'],
+                  "barnameId" :this.allocation[numOfDay][index2][0]['id'],
+                  "networkName" :this.allocation[numOfDay][index2][0]['network'],
+                  "networkId" :this.allocation[numOfDay][index2][0]['networkId'],
+                  // "RegDate" : this.allocation[3][index2][0]['registerDate']
+                  "duration" :  moment.from(this.allocation[numOfDay][index2][0]['registerDate'], 'en', 'YYYY-MM-DD').toNow(true),
+                  "RegDate" :  moment.from(this.allocation[numOfDay][index2][0]['registerDate'], 'en', 'YYYY-MM-DD').format('YYYY/MM/DD'),
+                  "totalDay":0,
+                  "totalConflict":0
+                }
+      this.test2 =   
+                {  
+                  "hour" : index
+                }
+              this.RowsData.push(this.test);
+              this.RowsDataForWhichDay.push(test4);
+            
+
+            
+              this.RowsExtraDataset.push(test3);
+         
+              this.IsCellClick.push(this.test2);
+            
+             
+      }
+     
+      this.test =   
+      {  
+        "hour" :""
+      }
+      let test2={
+        "hour" :""
+      }
+       let test3={
+         "hour" : ""
+       }
+      this.totalOfColumn.push(this.test);
+      this.remainResourceOfColumn.push(test2);
+      this.shortageResourceOfColumn.push(test3);
+
+      for (let i = 1; i <= 24;i++){
+  
+        this.totalOfColumn[numOfDay][i]= 0;
+        this.shortageResourceOfColumn[numOfDay][i]= 0;
+        this.remainResourceOfColumn[numOfDay][i]= this.resourceInfo[0]['resourceCapacity'];
+      }
+      this.remainResourceOfColumn[numOfDay]['hour'] = "منبع آزاد"
+      this.totalOfColumn[numOfDay]['hour'] = "مجموع"
+      this.shortageResourceOfColumn[numOfDay]['hour'] = "کمبود؟"
+     
+      for (let index = 1; index < this.RowsData.length; index++) { 
+        
+              for(let j = 0 ; j < this.allocation[numOfDay][index-1].length; j++){
+                
+                (this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']]) =0 ;
+               
+              }
+              
+              for(let j = 0 ; j < (this.allocation[numOfDay][index-1].length); j++){
+               
+                    
+     
+                (this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']]) += (this.allocation[numOfDay][index-1][j]['usedUnit']) ;
+                (this.RowsDataForWhichDay[index][this.allocation[numOfDay][index-1][j]['hour']]) = ((this.RowsData[index][this.allocation[numOfDay][index-1][j]['hour']])>0)?1:0 ;
+                this.totalOfColumn[numOfDay][this.allocation[numOfDay][index-1][j]['hour']] += this.allocation[numOfDay][index-1][j]['usedUnit'];
+           
+                delete this.RowsDataForWhichDay[index].hour;
+              }
+            
+             
+      }
+
+      this.RejectedArrayRowsDataset.push(this.RowsData)
+      this.RejectedArrayRowsDatasetForWhichDay.push(this.RowsDataForWhichDay)
+      this.RejectedArrayRowsExtraDataset.push(this.RowsExtraDataset)
+
+      this.resourceService.getFreeResourcePerHour(resourceId,year,month,this.allocation[numOfDay][0][0].day).subscribe((allocation: Allocation[]) => {
+     
+        let allocation2 = allocation['allocations'];
+        this.resourceInfo = allocation['test'];
+    
+        for(let numOfHour=0; numOfHour<this.allocation.length;numOfHour++){
+          for (let index = 0; index <allocation2.length; index++) { 
+          
+            this.remainResourceOfColumn[numOfDay][allocation2[index]['hour']] -= allocation2[index]['usedResource']
+                
+        }
+
+        for(let index = 0; index <24; index++){
+   
+            let dif = this.remainResourceOfColumn[numOfDay][index]-this.totalOfColumn[numOfDay][index];
+            this.shortageResourceOfColumn[numOfDay][index] =  (dif<0) ? 1 : 0;
+         
+    
+        }          
+      }
+
+
+
+for(let i=0; i<this.RejectedArrayRowsDatasetForWhichDay[numOfDay].length;i++) {
+for(let i2 in this.RejectedArrayRowsDatasetForWhichDay[numOfDay][i]) {
+
+this.RejectedArrayRowsExtraDataset[numOfDay][i].totalDay += 1
+                  if(this.shortageResourceOfColumn[numOfDay][i2]==1){
+                    this.RejectedArrayRowsExtraDataset[numOfDay][i].totalConflict += 1
+                  }
+  }
+}
+
+
+ 
+        //this.RowsData.shift()
+
+      }, () => {
+       alert('This is from orgField');
+      }
+      );
+      }
+
+      //this.RowsData.shift()
+
+    }, () => {
+      alert('This is from orgField');
+    }
+    );
+
+}
 
 
 
@@ -740,6 +957,7 @@ this.div[i]=false;
       });
 
       this.gettingWaitingForAcceptAllocation(this.resourceId,this.year, this.month);
+      this.gettingRejectedAllocation(this.resourceId,this.year, this.month);
     
       // this.gettingDataCapacity(4);
       this.gettingResources();
