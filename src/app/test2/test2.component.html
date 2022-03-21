@@ -114,68 +114,30 @@
               </thead>  
               <tbody style="  border: 1px solid black;">  
                 <tr class="tdrow" *ngFor="let row of sqlGetArray[numberDayOfMonthIndex]" style="  border: 1px solid black;">  
-                 
-                  <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  style="  border: 1px solid black;"
-                  
-                    >  
+                  <td style="  border: 1px solid black; padding: 0;direction: rtl;" > 
                   {{row["title"]}}
                 
                   </td>  
                     
                   <td ><img src='../../assets/library/images/{{row.networkIdArray}}.png' alt="network icon" width="40" height="40"></td>
         
-                  
-                  <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  style=""
-                  
-                    >  
+                  <td style="  border: 1px solid black; padding: 0;direction: rtl;" >  
                   {{row.networkArray.join(', ')}}
                 
                   </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
+                  <td style="  border: 1px solid black; padding: 0;direction: rtl;" >   
                   <span style="margin:0;">{{row.producersArray.join(', ')}}</span>
                 
                   </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
+                  <td style="  border: 1px solid black; padding: 0;direction: rtl;" > 
                   <span style="margin:0;">{{ momentHtml.from(row.lastRegisterDate, 'en', 'YYYY-MM-DD').format('YYYY/MM/DD')}}</span>
                 
                   </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
+                  <td style="  border: 1px solid black; padding: 0;direction: rtl;" >  
                   <span style="margin:0;">{{momentHtml.from(row.lastRegisterDate, 'en', 'YYYY-MM-DD').toNow(true)}}</span>
                 
                   </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
+                    <td style="  border: 1px solid black; padding: 0;direction: rtl;" >  
                   <span style="margin:0;">{{(row["totalConflict"]/row["totalDay"])*100| number:'1.0-1'}}%</span>
                 {{capacity}}
                   </td>  
@@ -203,7 +165,7 @@
               </tbody>  
           </table> 
         </div>
-        
+
           <div  class="test container  tblbottom" >
                 <table class='table_class table-sm' aria-labelledby="tableLabel" style="border:1px solid;  user-select: none; ">  
                   <thead style="background-color: #c1dee4;">  
@@ -216,21 +178,18 @@
                   <tbody style="border: #0000;">  
                     <tr *ngFor="let row of sqlGetArray[numberDayOfMonthIndex];let indexOfElement=index;">  
                       <td>    {{row["title"]}}</td>
-                      <ng-container *ngFor="let item of header; let i=index">
+                      <ng-container *ngFor="let item of header; let i=index;let last=last">
                         
                        
                         <td  
                         class="details"
-                        
-                        (mouseover)="onCellClick( indexOfElement, column )" 
-                        (mousedown)="onCellClickSingleClick( indexOfElement, column,$event )" 
-                        ondragstart="return false;" ondrop="return false;"
+               
                         *ngIf="i != 0 "
                         [ngClass]="
                         (column != 'hour' && row[column])? 'colData'     : (column == 'hour')? 'colTitle': ''" 
                          >  
                        
-                    {{i}} 
+                    {{sqlGetArray[numberDayOfMonthIndex][indexOfElement]['request'][i]}}
                     
                       </td>  
                  
@@ -240,17 +199,15 @@
                     </tr>  
                     <tr>
                       <td  *ngFor="let column of header"
-                      [style.background]="
-                      ( totalOfColumn[numberDayOfMonthIndex][column]<=remainResourceOfColumn[numberDayOfMonthIndex][column])?  '#0ffe87'
-                      : (column == 'hour')? '#f4c430': '#ff6b86'">
-                          {{totalOfColumn[numberDayOfMonthIndex][column]}}
+                     >
+                          <!-- {{totalOfColumn[numberDayOfMonthIndex][column]}}{{numberDayOfMonthIndex}} -->
                       </td>
                     
                     </tr>
                     <tr>
                       <td>ظرفیت آزاد</td>
                       <td  *ngFor="let column of header";let i =index>
-                          {{capacity}}{{sqlGetUsedResourceArray[0]}}
+                          <!-- {{capacity}}{{sqlGetUsedResourceArray[0]}} -->
                       </td>
                     
                     </tr>
@@ -258,188 +215,21 @@
           
                     <tr>
                       <td  *ngFor="let column of header">
-                        {{shortageResourceOfColumn[numberDayOfMonthIndex][column]}}
+                        <!-- {{shortageResourceOfColumn[numberDayOfMonthIndex][column]}} -->
                       </td>
                     
                     </tr>
-        
+              
           
                   </tbody>  
               </table> 
+            
             </div>
         
         
         </mat-tab>
         <mat-tab label="Second"> 
-          <div class="test container tbltop">
-            <table class='table table-sm table_info' aria-labelledby="tableLabel" style="  user-select: none;">  
-              <thead style="background-color: #358eac;">  
-                <tr style="  border: 1px solid #077296;color: #fff;">  
-               
-                  <!-- <th scope="col" *ngFor="let column of header2" >  
-                    {{column}}  
-                  </th>  -->
-                  <th>نام برنامه</th>
-                  <th colspan="2">شبکه</th>
-               
-                  <th>تهیه کننده</th>
-                  <th>تاریخ ثبت</th>
-                  <th>زمان سپری شده</th>
-                  <th>درصد تداخل</th>
-                  <th>تأیید&nbsp;/&nbsp;رد</th> 
-                 
-                </tr>  
-              </thead>  
-              <tbody style="  border: 1px solid black;">  
-                <tr class="tdrow" *ngFor="let row of RejectedArrayRowsExtraDataset[numberDayOfMonthIndex]| slice:1;let indexOfElement=index;" style="  border: 1px solid black;">  
-                 
-                  <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  style="  border: 1px solid black;"
-                  
-                    >  
-                  {{row["hour"]}}
-                
-                  </td>  
-                    
-                  <td ><img src='../../assets/library/images/{{row["networkId"]}}.png' alt="network icon" width="40" height="40"></td>
-        
-                  
-                  <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  style=""
-                  
-                    >  
-                  {{row["networkName"]}}
-                
-                  </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
-                  <span style="margin:0;">{{row["producer"]}}</span>
-                
-                  </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
-                  <span style="margin:0;">{{row["RegDate"]}}</span>
-                
-                  </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
-                  <span style="margin:0;">{{row["duration"]}}</span>
-                
-                  </td>  
-                    <td  
-                    
-                    
-                    ondragstart="return false;" ondrop="return false;"
-                  
-                  style="  border: 1px solid black; padding: 0;direction: rtl;"
-                    >  
-                  <span style="margin:0;">{{(row["totalConflict"]/row["totalDay"])*100| number:'1.0-1'}}%</span>
-                
-                  </td>  
-        
-                  <td>
-                    <button 
-                    type="button" class="btn btn-success acc_rej_btn btnaccept"
-                    (click)="acceptRequest(resourceId, row['year'], row['month'], row['day'], row['barnameId'])">
-                    تأیید 
-                  </button>
-                  &nbsp;
-                    <button 
-                    type="button" class="btn btn-danger acc_rej_btn btnrej"
-                    (click)="rejectRequest(resourceId, row['year'], row['month'], row['day'], row['barnameId'])">
-                    رد 
-                  </button>
-              
-            
-        
-                </td>
-                
-                </tr>  
-              
-        
-              </tbody>  
-          </table> 
-        </div>
-        
-          <div  class="test container  tblbottom" >
-                <table class='table_class table-sm' aria-labelledby="tableLabel" style="border:1px solid;  user-select: none; ">  
-                  <thead style="background-color: #c1dee4;">  
-                    <tr>  
-                      <th scope="col" *ngFor="let column of header">  
-                        {{column === 'activity' ? 'فعالیت' : (column === 'hour' ? 'ساعت' :column) }}  
-                      </th>  
-                    </tr>  
-                  </thead>  
-                  <tbody style="border: #0000;">  
-                    <tr *ngFor="let row of ArrayRowsDataset[numberDayOfMonthIndex]| slice:1;let indexOfElement=index;">  
-                        <td  
-                        class="details"
-                        
-                        (mouseover)="onCellClick( indexOfElement, column )" 
-                        (mousedown)="onCellClickSingleClick( indexOfElement, column,$event )" 
-                        ondragstart="return false;" ondrop="return false;"
-                        *ngFor="let column of header"
-                      
-   
-                        [ngClass]="
-                        (column != 'hour' && row[column])? 'colData'
-                        
-                        : (column == 'hour')? 'colTitle': ''" 
-                         >  
-                      {{row[column]}}
-                      
-                    
-                      </td>  
-                    </tr>  
-                    <tr>
-                      <td  *ngFor="let column of header"
-                      [style.background]="
-                      ( totalOfColumn[numberDayOfMonthIndex][column]<=remainResourceOfColumn[numberDayOfMonthIndex][column])?  '#0ffe87'
-                      : (column == 'hour')? '#f4c430': '#ff6b86'">
-                          {{totalOfColumn[numberDayOfMonthIndex][column]}}
-                      </td>
-                    
-                    </tr>
-                    <tr>
-                      <td  *ngFor="let column of header">
-                          {{remainResourceOfColumn[numberDayOfMonthIndex][column]}}
-                      </td>
-                    
-                    </tr>
-        
-          
-                    <tr>
-                      <td  *ngFor="let column of header">
-                 
-                      </td>
-                    
-                    </tr>
-        
-          
-                  </tbody>  
-              </table> 
-            </div>
+         
         
         
         </mat-tab>

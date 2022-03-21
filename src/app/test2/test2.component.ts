@@ -146,6 +146,7 @@ export class Test2Component implements OnInit {
   public momentHtml: any = moment;
   public capacity:number;
   public usedResource:any = [];
+  public freeResource:any = [];
 
 
 
@@ -198,7 +199,7 @@ export class Test2Component implements OnInit {
       this.resourceUnit = this.resourceInfo[0].unit;
 
     }, () => {
-     alert('This is from orgField');
+     alert('This is from orgField_202');
     }
     );
 
@@ -276,20 +277,30 @@ export class Test2Component implements OnInit {
           this.sqlGetUsedResourceArray[i]=[]
      
         }
-        console.log("90009",this.sqlGetArray[31])
+        
           this.allocation =  allocation['allocations'];
           this.capacity = allocation['capacity'];
           this.usedResource = allocation['usedResource']
 
          
-          this.allocation.forEach(element =>{
-       
-           
-            this.sqlGetArray[element['day']].push(element) 
-            
 
-          })
+         
+          this.allocation.forEach(element =>{
+            var arr = Array<number>(31).fill(0);
+            element['hoursArray'].forEach((value: any, index: any) => {
+              arr[value - 1]= element['unitRequestsArray'][index]
+           
+          });
+           
+
+            element['request'] = arr;
+          
+            this.sqlGetArray[element['day']-1].push(element) 
             
+ 
+          })
+          console.log(20002, this.sqlGetArray)
+         
          
           this.usedResource.forEach((element: { [x: string]: string | number; }) =>{
        
@@ -298,10 +309,21 @@ export class Test2Component implements OnInit {
             
 
           })
-            
-         
-            
+          
+          for(let i = 0;i<31;i++){
+            this.freeResource.push([])
+          }
+          for(let i = 0;i<31;i++){
+            for(let j = 0; j<24; j++){
+              this.freeResource[i][j]=100;
+            }
+          }
 
+        
+
+          
+          console.log("40001",this.freeResource)  
+          console.log("40002",this.usedResource)
             console.log("90005",this.sqlGetArray)
 
             this.sqlGetUsedResourceArray.forEach(function (element: any) {
@@ -473,7 +495,7 @@ export class Test2Component implements OnInit {
             //this.RowsData.shift()
 
           }, () => {
-           alert('This is from orgField');
+           alert('This is from orgField_490');
           }
           );
           }
@@ -481,7 +503,7 @@ export class Test2Component implements OnInit {
           //this.RowsData.shift()
 
         }, () => {
-          alert('This is from orgField');
+          alert('This is from orgField_498');
         }
         );
         
@@ -652,7 +674,7 @@ export class Test2Component implements OnInit {
             //this.RowsData.shift()
 
           }, () => {
-           alert('This is from orgField');
+           alert('This is from orgField_669');
           }
           );
           }
@@ -660,7 +682,7 @@ export class Test2Component implements OnInit {
           //this.RowsData.shift()
 
         }, () => {
-          alert('This is from orgField');
+          alert('This is from orgField_677');
         }
         );
 
@@ -675,7 +697,7 @@ export class Test2Component implements OnInit {
           this.gettingRejectedAllocation(resourceId,year, month);
 
         }, () => {
-         alert('This is from orgField');
+         alert('This is from orgField_692');
         }
         );
 
@@ -690,7 +712,7 @@ export class Test2Component implements OnInit {
         this.gettingRejectedAllocation(resourceId,year, month);
 
         }, () => {
-         alert('This is from orgField');
+         alert('This is from orgField_707');
         }
         );
 
@@ -761,7 +783,7 @@ export class Test2Component implements OnInit {
           //this.RowsData.shift()
 
         }, () => {
-         alert('This is from orgField');
+         alert('This is from orgField_778');
         }
         );
       
@@ -1128,7 +1150,7 @@ this.RejectedArrayRowsExtraDataset[numOfDay][i].totalDay += 1
       //this.RowsData.shift()
 
     }, () => {
-     alert('This is from orgField');
+     alert('This is from orgField_1145');
     }
     );
     }
@@ -1136,13 +1158,26 @@ this.RejectedArrayRowsExtraDataset[numOfDay][i].totalDay += 1
     //this.RowsData.shift()
 
   }, () => {
-    alert('This is from orgField');
+    alert('This is from orgField_1153');
   }
   );
 
 }
 
+displayedColumns: string[] = ['item', 'cost'];
+  transactions: any[] = [
+    {item: 'Beach ball', cost: 4},
+    {item: 'Towel', cost: 5},
+    {item: 'Frisbee', cost: 2},
+    {item: 'Sunscreen', cost: 4},
+    {item: 'Cooler', cost: 25},
+    {item: 'Swim suit', cost: 15},
+  ];
 
+  /** Gets the total cost of all transactions. */
+  getTotalCost() {
+    return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+  }
 
   ngOnInit() {
     for(let i=0;i<=31;i++){

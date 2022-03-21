@@ -384,7 +384,7 @@ math = Math;
             this.resourceUnit = this.resourceInfo[0].unit;
     
           }, () => {
-            alert('This is from orgField');
+            alert('This is from orgField_387');
           }
           );
       
@@ -503,12 +503,13 @@ math = Math;
             //this.RowsData.shift()
 
           }, () => {
-            alert('This is from orgField');
+            alert('This is from orgField_506');
           }
           );
           
           
           this.resourceService.getWaitingAllocationsForColor(resourceId,year,month).subscribe((allocation: Allocation[]) => {
+            
             this.header=["hour","activity"]
           
             for (let i = 1; i <= 24;i++){
@@ -560,7 +561,7 @@ math = Math;
             //this.RowsData.shift()
 
           }, () => {
-            alert('This is from orgField');
+            alert('This is from orgField_563');
           }
           );
 
@@ -630,7 +631,7 @@ math = Math;
             //this.RowsData.shift()
 
           }, () => {
-            alert('This is from orgField');
+            alert('This is from orgField_633');
           }
           );
      
